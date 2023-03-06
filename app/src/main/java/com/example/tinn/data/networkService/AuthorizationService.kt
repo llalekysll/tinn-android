@@ -1,7 +1,6 @@
 package com.example.tinn.data.networkService
 
 import com.example.tinn.data.modelForJSON.*
-import com.example.tinntest.data.modelForJSON.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header

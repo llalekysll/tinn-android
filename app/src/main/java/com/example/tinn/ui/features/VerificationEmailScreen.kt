@@ -17,14 +17,14 @@ import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.tinntest.R
-import com.example.tinntest.ui.components.AppButton
-import com.example.tinntest.ui.components.TextFieldsWithLabelError
-import com.example.tinntest.ui.navigation.Screens
-import com.example.tinntest.utils.AUTHORIZATION
-import com.example.tinntest.utils.EMAIL_IS_CONFIRMATION
-import com.example.tinntest.utils.TOKEN
-import com.example.tinntest.viewModel.AuthorizationViewModel
+import com.example.tinn.R
+import com.example.tinn.ui.components.AppButton
+import com.example.tinn.ui.components.TextFieldsWithLabelError
+import com.example.tinn.ui.navigation.Screens
+import com.example.tinn.utils.AUTHORIZATION
+import com.example.tinn.utils.EMAIL_IS_CONFIRMATION
+import com.example.tinn.utils.TOKEN
+import com.example.tinn.viewModel.AuthorizationViewModel
 
 @Composable
 fun VerificationEmailScreen(navController: NavController) {

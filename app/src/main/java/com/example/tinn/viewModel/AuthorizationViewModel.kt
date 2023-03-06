@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tinntest.data.modelForJSON.*
-import com.example.tinntest.data.networkService.AuthorizationService
-import com.example.tinntest.data.networkService.RetrofitClient
+import com.example.tinn.data.modelForJSON.*
+import com.example.tinn.data.networkService.AuthorizationService
+import com.example.tinn.data.networkService.RetrofitClient
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import retrofit2.Callback
