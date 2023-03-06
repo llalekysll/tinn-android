@@ -17,3 +17,12 @@ sealed class MainScreens(val route: String, val label: String, val idIcon: Int) 
     object Room : MainScreens("room", "My room", R.drawable.ic_room)
     object Marketplace : MainScreens("marketplace", "Marketplace", R.drawable.ic_phone)
 }
+
+val mainScreensList = mutableListOf(
+    MainScreens.Home,
+    MainScreens.Popular,
+    MainScreens.Forum,
+    MainScreens.Application,
+    MainScreens.Room,
+    MainScreens.Marketplace,
+)
