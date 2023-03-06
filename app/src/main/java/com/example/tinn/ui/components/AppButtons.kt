@@ -1,4 +1,4 @@
-package com.example.tinntest.ui.components
+package com.example.tinn.ui.components
 
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.*

@@ -1,4 +1,4 @@
-package com.example.tinntest.ui.navigation
+package com.example.tinn.ui.navigation
 
 sealed class Screens(val route: String) {
     object SignIn : Screens("signIn")

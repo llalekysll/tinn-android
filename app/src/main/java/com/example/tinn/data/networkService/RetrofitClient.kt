@@ -1,4 +1,4 @@
-package com.example.tinntest.data.networkService
+package com.example.tinn.data.networkService
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,4 +1,4 @@
-package com.example.tinntest.ui.features
+package com.example.tinn.ui.features
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text

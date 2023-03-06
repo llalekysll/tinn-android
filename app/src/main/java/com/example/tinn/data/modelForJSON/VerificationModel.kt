@@ -1,4 +1,4 @@
-package com.example.tinntest.data.modelForJSON
+package com.example.tinn.data.modelForJSON
 
 data class VerificationModel(
     val verification_code: String

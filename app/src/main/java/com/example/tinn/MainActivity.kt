@@ -14,12 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
 import com.example.tinn.ui.theme.TinnTheme
-import com.example.tinntest.ui.navigation.AppNavHost
-import com.example.tinntest.ui.navigation.Screens
-import com.example.tinntest.utils.AUTHORIZATION
-import com.example.tinntest.utils.EMAIL_IS_CONFIRMATION
-import com.example.tinntest.utils.TOKEN
-import com.example.tinntest.viewModel.ErrorObserver
+import com.example.tinn.ui.navigation.AppNavHost
+import com.example.tinn.ui.navigation.Screens
+import com.example.tinn.utils.AUTHORIZATION
+import com.example.tinn.utils.EMAIL_IS_CONFIRMATION
+import com.example.tinn.utils.TOKEN
+import com.example.tinn.viewModel.ErrorObserver
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.example.tinntest.viewModel
+package com.example.tinn.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

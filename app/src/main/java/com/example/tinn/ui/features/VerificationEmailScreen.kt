@@ -1,4 +1,4 @@
-package com.example.tinntest.ui.features
+package com.example.tinn.ui.features
 
 import android.content.Context
 import androidx.activity.ComponentActivity

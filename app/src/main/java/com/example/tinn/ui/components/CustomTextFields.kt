@@ -1,4 +1,4 @@
-package com.example.tinntest.ui.components
+package com.example.tinn.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,11 +12,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.example.tinntest.utils.emailIfValid
-import com.example.tinntest.R
-import com.example.tinntest.ui.theme.Alpha
-import com.example.tinntest.ui.theme.Blue
-import com.example.tinntest.ui.theme.DarkGray
+import com.example.tinn.utils.emailIfValid
+import com.example.tinn.R
+import com.example.tinn.ui.theme.Alpha
+import com.example.tinn.ui.theme.Blue
+import com.example.tinn.ui.theme.DarkGray
 
 @Composable
 fun TextFieldsWithLabelError(

@@ -1,4 +1,4 @@
-package com.example.tinntest.data.modelForJSON
+package com.example.tinn.data.modelForJSON
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,14 +1,14 @@
-package com.example.tinntest.ui.navigation
+package com.example.tinn.ui.navigation
 
 import androidx.compose.runtime.Composable
  import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.tinntest.ui.features.MainScreen
-import com.example.tinntest.ui.features.RegisterScreen
-import com.example.tinntest.ui.features.SignInScreen
-import com.example.tinntest.ui.features.VerificationEmailScreen
+import com.example.tinn.ui.features.MainScreen
+import com.example.tinn.ui.features.RegisterScreen
+import com.example.tinn.ui.features.SignInScreen
+import com.example.tinn.ui.features.VerificationEmailScreen
 
 @Composable
 fun AppNavHost(

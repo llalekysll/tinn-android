@@ -1,4 +1,4 @@
-package com.example.tinntest.ui.features
+package com.example.tinn.ui.features
 
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
@@ -16,16 +16,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.tinntest.ui.components.AppButton
-import com.example.tinntest.ui.components.CheckBoxWithLabel
-import com.example.tinntest.ui.components.TextFieldEmail
-import com.example.tinntest.ui.components.TextFieldPassword
-import com.example.tinntest.ui.navigation.Screens
-import com.example.tinntest.utils.AUTHORIZATION
-import com.example.tinntest.utils.EMAIL_IS_CONFIRMATION
-import com.example.tinntest.utils.TOKEN
-import com.example.tinntest.utils.emailIfValid
-import com.example.tinntest.viewModel.AuthorizationViewModel
+import com.example.tinn.ui.components.AppButton
+import com.example.tinn.ui.components.CheckBoxWithLabel
+import com.example.tinn.ui.components.TextFieldEmail
+import com.example.tinn.ui.components.TextFieldPassword
+import com.example.tinn.ui.navigation.Screens
+import com.example.tinn.utils.AUTHORIZATION
+import com.example.tinn.utils.EMAIL_IS_CONFIRMATION
+import com.example.tinn.utils.TOKEN
+import com.example.tinn.utils.emailIfValid
+import com.example.tinn.viewModel.AuthorizationViewModel
 
 @Composable
 fun SignInScreen(navHostController: NavHostController) {
@@ -44,7 +44,6 @@ fun SignInScreen(navHostController: NavHostController) {
                 Context.MODE_PRIVATE
             )
             pref.edit().putString(TOKEN, token).apply()
-            pref.
             pref.edit().putBoolean(EMAIL_IS_CONFIRMATION, true).apply()
         }
 
