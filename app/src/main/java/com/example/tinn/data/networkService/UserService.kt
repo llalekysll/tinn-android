@@ -11,11 +11,8 @@ import retrofit2.http.PUT
 
 interface UserService {
     @GET("profile/user")
-    fun getUser(@Header("Authorization") token: String): Call<ResponceModel<ResponceDataUserModel>>
+    fun getUser(): Call<ResponceModel<ResponceDataUserModel>>
 
     @PUT("profile/user")
-    fun putUser(
-        @Body profileModel: ProfileModel,
-        @Header("Authorization") token: String
-    ): Call<ResponceDataUserModel>
+    fun putUser(@Body profileModel: ProfileModel, ): Call<ResponceDataUserModel>
 }
