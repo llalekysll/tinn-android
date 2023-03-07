@@ -16,8 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
 import com.example.tinn.ui.components.AppButton
+import com.example.tinn.ui.components.Spinner
 import com.example.tinn.ui.components.TextFieldsWithLabelError
 import com.example.tinn.ui.theme.Blue
+import com.example.tinn.ui.theme.Gray
 import com.example.tinn.utils.DigitVisualTransformation
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -27,7 +29,7 @@ fun UserInputInfoScreen(navController: NavController) {
     var login by remember { mutableStateOf("") }
     var firstName by remember { mutableStateOf("") }
     var secondName by remember { mutableStateOf("") }
-    var sex by remember { mutableStateOf(0) }
+    var sex by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
     var dateOfBirth by remember { mutableStateOf("") }
 
@@ -61,6 +63,13 @@ fun UserInputInfoScreen(navController: NavController) {
             value = secondName,
             onValueChange = { secondName = it },
             labelText = "Фамилия",
+        )
+
+        Spinner(
+            items = listOf("Мужской", "Женский"),
+            hint = if (sex == "") "Выберите пол" else sex,
+            borderColor = Gray,
+            onClick = { sex = it }
         )
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -115,6 +124,7 @@ fun UserInputInfoScreen(navController: NavController) {
             enabled = login.isNotEmpty()
                     && firstName.isNotEmpty()
                     && secondName.isNotEmpty()
+                    && sex.isNotEmpty()
                     && phone.length == 16
                     && dateOfBirth.length == 8,
             text = "Регистрация"
