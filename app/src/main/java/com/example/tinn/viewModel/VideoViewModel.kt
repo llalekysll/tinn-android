@@ -3,9 +3,10 @@ package com.example.tinn.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.tinn.data.emptities.Video
 import com.example.tinn.data.modelForJSON.ResponceModel
 import com.example.tinn.data.networkService.RetrofitClient
-import com.example.tinn.data.networkService.Video
+import com.example.tinn.data.networkService.VideoService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,7 +16,7 @@ class VideoViewModel : ViewModel() {
     val video: LiveData<List<Video>>
         get() = _video
 
-    private val db = RetrofitClient.getRetrofitService().create(Video::class.java)
+    private val db = RetrofitClient.getRetrofitService().create(VideoService::class.java)
 
     fun getVideo(token: String) {
         db.getVideo(token).enqueue(object : Callback<ResponceModel<Video>> {

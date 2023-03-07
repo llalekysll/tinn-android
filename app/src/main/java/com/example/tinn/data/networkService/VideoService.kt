@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
-interface Video {
+interface VideoService {
     @GET("video/categories")
     fun getCategories(@Header("Authorization") token: String): Call<Any>
 
