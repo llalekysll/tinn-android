@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.tinn.ui.components.AppButton
 import com.example.tinn.ui.components.TextFieldsWithLabelError
 import com.example.tinn.ui.theme.Blue
 import com.example.tinn.utils.DigitVisualTransformation
@@ -28,7 +29,7 @@ fun UserInputInfoScreen(navController: NavController) {
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -37,7 +38,7 @@ fun UserInputInfoScreen(navController: NavController) {
         Text(
             text = "Продолжите регистрацию",
             style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 32.dp)
         )
 
         TextFieldsWithLabelError(
@@ -99,5 +100,15 @@ fun UserInputInfoScreen(navController: NavController) {
             }
         )
 
+        AppButton(
+            onClick = {  },
+            modifier = Modifier.padding(top = 16.dp),
+            enabled = login.isNotEmpty()
+                    && firstName.isNotEmpty()
+                    && secondName.isNotEmpty()
+                    && phone.length == 16
+                    && dateOfBirth.length == 8,
+            text = "Регистрация"
+        )
     }
 }
