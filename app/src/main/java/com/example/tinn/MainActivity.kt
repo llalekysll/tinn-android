@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
+import com.example.tinn.data.networkService.ServiceInterceptor
 import com.example.tinn.ui.theme.TinnTheme
 import com.example.tinn.ui.navigation.AppNavHost
 import com.example.tinn.ui.navigation.Screens
@@ -28,10 +29,12 @@ class MainActivity : ComponentActivity() {
                 val stateUI = rememberSystemUiController()
                 stateUI.setStatusBarColor(MaterialTheme.colors.background)
 
-                val statusAuthorization = LocalContext.current.getSharedPreferences(
-                    AUTHORIZATION, MODE_PRIVATE
-                ).getString(STATUS_AUTHORIZATION, "")
+                val pref = LocalContext.current.getSharedPreferences(AUTHORIZATION, MODE_PRIVATE)
 
+                val token = pref.getString(TOKEN, "")
+                if (!token.isNullOrEmpty()) ServiceInterceptor.token = token
+
+                val statusAuthorization = pref.getString(STATUS_AUTHORIZATION, "")
                 val startDestination = getStartDestination(statusAuthorization!!)
 
                 val navController = rememberNavController()
@@ -68,8 +71,8 @@ private fun ObserverErrorMessage(snackBarState: SnackbarHostState) {
 private inline fun getStartDestination(statusAuthorization: String): String {
     return when (statusAuthorization) {
         IS_AUTHORIZATION -> Screens.Main.route
-        NOT_AUTHORIZATION -> Screens.SignIn.route
+        INPUT_INFO_USER -> Screens.InputInfoUser.route
         VERIFICATION_EMAIL -> Screens.ConfirmEmail.route
-        else -> Screens.InputInfoUser.route
+        else -> Screens.SignIn.route
     }
 }
