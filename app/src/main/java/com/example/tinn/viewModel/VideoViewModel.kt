@@ -18,8 +18,8 @@ class VideoViewModel : ViewModel() {
 
     private val db = RetrofitClient.getRetrofitService().create(VideoService::class.java)
 
-    fun getVideo(token: String) {
-        db.getVideo(token).enqueue(object : Callback<ResponceModel<Video>> {
+    fun getVideo() {
+        db.getVideo().enqueue(object : Callback<ResponceModel<Video>> {
             override fun onResponse(call: Call<ResponceModel<Video>>, response: Response<ResponceModel<Video>>) {
                 _video.value = response.body()?.data
             }
