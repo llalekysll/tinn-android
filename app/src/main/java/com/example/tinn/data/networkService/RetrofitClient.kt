@@ -9,7 +9,7 @@ object RetrofitClient {
     fun getRetrofitService(): Retrofit {
         if (retrofitService == null) {
             retrofitService = Retrofit.Builder()
-                .baseUrl("https://auth.tinn.io/api/")
+                .baseUrl("https://api.tinn.io/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
