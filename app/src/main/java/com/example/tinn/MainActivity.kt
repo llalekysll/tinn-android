@@ -16,9 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.tinn.ui.theme.TinnTheme
 import com.example.tinn.ui.navigation.AppNavHost
 import com.example.tinn.ui.navigation.Screens
-import com.example.tinn.utils.AUTHORIZATION
-import com.example.tinn.utils.EMAIL_IS_CONFIRMATION
-import com.example.tinn.utils.TOKEN
+import com.example.tinn.utils.*
 import com.example.tinn.viewModel.ErrorObserver
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -30,15 +28,11 @@ class MainActivity : ComponentActivity() {
                 val stateUI = rememberSystemUiController()
                 stateUI.setStatusBarColor(MaterialTheme.colors.background)
 
-                val token = LocalContext.current.getSharedPreferences(
+                val statusAuthorization = LocalContext.current.getSharedPreferences(
                     AUTHORIZATION, MODE_PRIVATE
-                ).getString(TOKEN, "")
+                ).getString(STATUS_AUTHORIZATION, "")
 
-                val isConfirmEmail = LocalContext.current.getSharedPreferences(
-                    AUTHORIZATION, MODE_PRIVATE
-                ).getBoolean(EMAIL_IS_CONFIRMATION, false)
-
-                val startDestination = getStartDestination(token, isConfirmEmail)
+                val startDestination = getStartDestination(statusAuthorization!!)
 
                 val navController = rememberNavController()
                 val snackbarHostState = remember { SnackbarHostState() }
@@ -71,14 +65,11 @@ private fun ObserverErrorMessage(snackBarState: SnackbarHostState) {
     })
 }
 
-private inline fun getStartDestination(token: String?, isConfirmEmail: Boolean): String {
-    return if (token == "") {
-        Screens.SignIn.route
-    } else {
-        if (isConfirmEmail) {
-            Screens.Main.route
-        } else {
-            Screens.ConfirmEmail.route
-        }
+private inline fun getStartDestination(statusAuthorization: String): String {
+    return when (statusAuthorization) {
+        IS_AUTHORIZATION -> Screens.Main.route
+        NOT_AUTHORIZATION -> Screens.SignIn.route
+        VERIFICATION_EMAIL -> Screens.ConfirmEmail.route
+        else -> Screens.InputInfoUser.route
     }
 }
