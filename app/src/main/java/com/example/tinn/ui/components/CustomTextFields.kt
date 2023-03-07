@@ -28,7 +28,7 @@ fun TextFieldsWithLabelError(
     errorText: String = "",
     labelText: String = "",
     isError: Boolean = false,
-    modifier: Modifier = Modifier.fillMaxWidth().padding(horizontal = 40.dp),
+    modifier: Modifier = Modifier.fillMaxWidth(),
     keyboardOptions: KeyboardOptions = KeyboardOptions()
 ) {
     Column {
