@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tinn.ui.components.TextFieldsWithLabelError
+import com.example.tinn.utils.PhoneNumberVisualTranformation
 
 @Composable
 fun UserInputInfoScreen(navController: NavController) {
@@ -35,22 +36,23 @@ fun UserInputInfoScreen(navController: NavController) {
             onValueChange = { secondName = it },
             labelText = "Фамилия",
         )
-        
+
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             TextFieldsWithLabelError(
                 value = phone,
                 modifier = Modifier.width(221.dp),
-                onValueChange = {phone = it},
+                onValueChange = { phone = it },
+                visualTransformation = PhoneNumberVisualTranformation("+7-000-000-00-00", '0'),
                 labelText = "Телефон",
             )
 
             TextFieldsWithLabelError(
                 value = dateOfBirth,
-                onValueChange = {dateOfBirth = it},
+                onValueChange = { dateOfBirth = it },
                 modifier = Modifier.width(174.dp),
                 labelText = "ДД/ММ/ГГГГ",
             )
         }
-        
+
     }
 }
