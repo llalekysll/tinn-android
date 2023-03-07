@@ -4,9 +4,11 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -21,20 +23,35 @@ import androidx.navigation.NavController
 import com.example.tinn.ui.components.AppButton
 import com.example.tinn.ui.components.Spinner
 import com.example.tinn.ui.components.TextFieldsWithLabelError
+import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.ui.theme.Blue
 import com.example.tinn.ui.theme.Gray
-import com.example.tinn.utils.AUTHORIZATION
-import com.example.tinn.utils.DigitVisualTransformation
-import com.example.tinn.utils.TOKEN
+import com.example.tinn.utils.*
 import com.example.tinn.viewModel.UserViewModel
 
 @Composable
 fun UserInputInfoScreen(navController: NavController) {
-    val token = LocalContext.current.getSharedPreferences(
+    val pref = LocalContext.current.getSharedPreferences(
         AUTHORIZATION, ComponentActivity.MODE_PRIVATE
-    ).getString(TOKEN, "")
+    )
+    val token = pref.getString(TOKEN, "")
 
     val viewModel: UserViewModel = viewModel()
+    val isShowMain by viewModel.requestIsSuccess.observeAsState()
+
+    if (isShowMain == true) {
+        pref.edit().putString(STATUS_AUTHORIZATION, IS_AUTHORIZATION).apply()
+
+        navController.navigate(Screens.Main.route) {
+            popUpTo(navController.graph.startDestinationId) {
+                saveState = true
+            }
+            launchSingleTop = true
+            restoreState = true
+        }
+    }
+
+    if (isShowMain == null) CircularProgressIndicator()
 
     var login by remember { mutableStateOf("") }
     var firstName by remember { mutableStateOf("") }
@@ -151,4 +168,3 @@ fun UserInputInfoScreen(navController: NavController) {
         )
     }
 }
-
