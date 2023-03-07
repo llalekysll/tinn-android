@@ -31,14 +31,12 @@ import com.example.tinn.viewModel.UserViewModel
 
 @Composable
 fun UserInputInfoScreen(navController: NavController) {
-    val pref = LocalContext.current.getSharedPreferences(
-        AUTHORIZATION, ComponentActivity.MODE_PRIVATE
-    )
-    val token = pref.getString(TOKEN, "")
-
     val viewModel: UserViewModel = viewModel()
     val state by viewModel.requestStatus.observeAsState()
 
+    val pref = LocalContext.current.getSharedPreferences(
+        AUTHORIZATION, ComponentActivity.MODE_PRIVATE
+    )
     if (state == "OK") {
         pref.edit().putString(STATUS_AUTHORIZATION, IS_AUTHORIZATION).apply()
 
@@ -154,7 +152,6 @@ fun UserInputInfoScreen(navController: NavController) {
                     sex,
                     phone,
                     dateOfBirth,
-                    token
                 )
             },
             modifier = Modifier.padding(top = 16.dp),

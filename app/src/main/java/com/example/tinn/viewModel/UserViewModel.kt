@@ -26,7 +26,6 @@ class UserViewModel : ViewModel() {
         sex: String,
         phone: String,
         dateOfBirth: String,
-        token: String?,
     ) {
         _requestStatus.value = "LOADING"
         val date = SimpleDateFormat("ddMMyyyy").parse(dateOfBirth)
@@ -41,7 +40,7 @@ class UserViewModel : ViewModel() {
                 dataOfBirth = date
             )
 
-            db.putUser(model, token!!).enqueue(object : Callback<ResponceDataUserModel> {
+            db.putUser(model).enqueue(object : Callback<ResponceDataUserModel> {
                 override fun onResponse(
                     call: Call<ResponceDataUserModel>,
                     response: Response<ResponceDataUserModel>
