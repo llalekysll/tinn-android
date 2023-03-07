@@ -2,6 +2,7 @@ package com.example.tinn.ui.features.authorization
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -9,9 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
 import com.example.tinn.ui.components.AppButton
 import com.example.tinn.ui.components.TextFieldsWithLabelError
@@ -63,7 +65,8 @@ fun UserInputInfoScreen(navController: NavController) {
             TextFieldsWithLabelError(
                 value = phone,
                 modifier = Modifier.width(200.dp),
-                onValueChange = { if (phone.length < 10) phone = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+                onValueChange = { if (phone.length < 10 && it.isDigitsOnly()) phone = it },
                 visualTransformation = DigitVisualTransformation("+7-000-000-00-00", '0'),
                 labelText = "Телефон",
             )
@@ -72,12 +75,12 @@ fun UserInputInfoScreen(navController: NavController) {
                 value = dateOfBirth,
                 onValueChange = { if (dateOfBirth.length < 8) dateOfBirth = it },
                 modifier = Modifier.width(174.dp),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                 visualTransformation = DigitVisualTransformation("00/00/0000", '0'),
                 labelText = "ДД/ММ/ГГГГ",
             )
-
-
         }
+
         val annotatedString = buildAnnotatedString {
             append("Нажимая на кнопку 'Регистрация' вы даете согласие на ")
             pushStringAnnotation("обработку персональных данных", "https://tinn.io/main")
@@ -112,3 +115,4 @@ fun UserInputInfoScreen(navController: NavController) {
         )
     }
 }
+
