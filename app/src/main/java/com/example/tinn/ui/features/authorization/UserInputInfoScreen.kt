@@ -1,5 +1,6 @@
 package com.example.tinn.ui.features.authorization
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
@@ -8,24 +9,33 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tinn.ui.components.AppButton
 import com.example.tinn.ui.components.Spinner
 import com.example.tinn.ui.components.TextFieldsWithLabelError
 import com.example.tinn.ui.theme.Blue
 import com.example.tinn.ui.theme.Gray
+import com.example.tinn.utils.AUTHORIZATION
 import com.example.tinn.utils.DigitVisualTransformation
-import java.text.ParseException
-import java.text.SimpleDateFormat
+import com.example.tinn.utils.TOKEN
+import com.example.tinn.viewModel.UserViewModel
 
 @Composable
 fun UserInputInfoScreen(navController: NavController) {
+    val token = LocalContext.current.getSharedPreferences(
+        AUTHORIZATION, ComponentActivity.MODE_PRIVATE
+    ).getString(TOKEN, "")
+
+    val viewModel: UserViewModel = viewModel()
+
     var login by remember { mutableStateOf("") }
     var firstName by remember { mutableStateOf("") }
     var secondName by remember { mutableStateOf("") }
@@ -119,13 +129,23 @@ fun UserInputInfoScreen(navController: NavController) {
         )
 
         AppButton(
-            onClick = { },
+            onClick = {
+                viewModel.putUserInfo(
+                    login,
+                    firstName,
+                    secondName,
+                    sex,
+                    phone,
+                    dateOfBirth,
+                    token
+                )
+            },
             modifier = Modifier.padding(top = 16.dp),
             enabled = login.isNotEmpty()
                     && firstName.isNotEmpty()
                     && secondName.isNotEmpty()
                     && sex.isNotEmpty()
-                    && phone.length == 16
+                    && phone.length == 10
                     && dateOfBirth.length == 8,
             text = "Регистрация"
         )
