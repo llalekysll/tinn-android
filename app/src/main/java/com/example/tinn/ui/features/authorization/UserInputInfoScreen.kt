@@ -19,6 +19,8 @@ import com.example.tinn.ui.components.AppButton
 import com.example.tinn.ui.components.TextFieldsWithLabelError
 import com.example.tinn.ui.theme.Blue
 import com.example.tinn.utils.DigitVisualTransformation
+import java.text.ParseException
+import java.text.SimpleDateFormat
 
 @Composable
 fun UserInputInfoScreen(navController: NavController) {
@@ -73,7 +75,11 @@ fun UserInputInfoScreen(navController: NavController) {
 
             TextFieldsWithLabelError(
                 value = dateOfBirth,
-                onValueChange = { if (dateOfBirth.length < 8) dateOfBirth = it },
+                onValueChange = {
+                    if (dateOfBirth.length < 8 && it.isDigitsOnly()) {
+                        dateOfBirth = it
+                    }
+                },
                 modifier = Modifier.width(174.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                 visualTransformation = DigitVisualTransformation("00/00/0000", '0'),
@@ -104,7 +110,7 @@ fun UserInputInfoScreen(navController: NavController) {
         )
 
         AppButton(
-            onClick = {  },
+            onClick = { },
             modifier = Modifier.padding(top = 16.dp),
             enabled = login.isNotEmpty()
                     && firstName.isNotEmpty()
