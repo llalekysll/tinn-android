@@ -15,7 +15,9 @@ import com.example.tinn.R
 import com.example.tinn.ui.theme.Red
 
 @Composable
-fun Toolbar() {
+fun Toolbar(
+    exit: () -> Unit
+) {
     TopAppBar(elevation = 20.dp, backgroundColor = Color.White) {
         var isExpand by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.End) {
@@ -45,7 +47,12 @@ fun Toolbar() {
                 offset = DpOffset((-100).dp, 0.dp)
             ) {
                 listOf("Мой канал", "Настройки", "Выход").forEach {
-                    DropdownMenuItem(onClick = { isExpand = false }) {
+                    DropdownMenuItem(onClick = {
+                        isExpand = false
+                        when (it) {
+                            else -> exit()
+                        }
+                    }) {
                         Text(
                             text = it,
                             color = if (it == "Выход") Red else Color.Black
