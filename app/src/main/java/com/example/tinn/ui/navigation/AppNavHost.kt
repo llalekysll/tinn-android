@@ -41,7 +41,7 @@ fun AppNavHost(
         }
 
         composable(Screens.Main.route) {
-            MainScreen()
+            MainScreen(navController)
         }
     }
 }
