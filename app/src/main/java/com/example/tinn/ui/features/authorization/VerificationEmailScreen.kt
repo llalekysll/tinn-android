@@ -18,6 +18,7 @@ import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tinn.R
+import com.example.tinn.data.networkService.ServiceInterceptor
 import com.example.tinn.ui.components.AppButton
 import com.example.tinn.ui.components.TextFieldsWithLabelError
 import com.example.tinn.ui.navigation.Screens
@@ -31,10 +32,6 @@ import com.example.tinn.viewModel.AuthorizationViewModel
 fun VerificationEmailScreen(navController: NavController) {
     val viewModel = viewModel(AuthorizationViewModel::class.java)
     val emailIsVerificated by viewModel.emailIsVerificated.observeAsState(false)
-
-    val token = LocalContext.current.getSharedPreferences(
-        AUTHORIZATION, ComponentActivity.MODE_PRIVATE
-    ).getString(TOKEN, "")
 
     if (emailIsVerificated) {
         val context = LocalContext.current
@@ -88,7 +85,7 @@ fun VerificationEmailScreen(navController: NavController) {
 
         AppButton(
             modifier = Modifier.padding(top = 16.dp),
-            onClick = { viewModel.verificationEmail(code, token!!) },
+            onClick = { viewModel.verificationEmail(code) },
             enabled = code.isDigitsOnly() && code.isNotEmpty(),
             text = "Подтвердить"
         )
