@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -27,15 +28,14 @@ fun TextFieldsWithLabelError(
     errorText: String = "",
     labelText: String = "",
     isError: Boolean = false,
+    modifier: Modifier = Modifier.fillMaxWidth().padding(horizontal = 40.dp),
     keyboardOptions: KeyboardOptions = KeyboardOptions()
 ) {
     Column {
         TextField(
             value = value,
             onValueChange = { text -> onValueChange(text) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp, start = 40.dp, end = 40.dp),
+            modifier = modifier,
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Alpha
             ),
