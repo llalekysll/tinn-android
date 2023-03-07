@@ -1,6 +1,7 @@
 package com.example.tinn.data.networkService
 
 import com.example.tinn.data.emptities.Comment
+import com.example.tinn.data.emptities.Video
 import com.example.tinn.data.modelForJSON.ResponceModel
 import retrofit2.Call
 import retrofit2.http.GET
