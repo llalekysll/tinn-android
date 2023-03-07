@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.tinn.data.modelForJSON.*
 import com.example.tinn.data.networkService.AuthorizationService
 import com.example.tinn.data.networkService.RetrofitClient
+import com.example.tinn.data.networkService.ServiceInterceptor
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import retrofit2.Callback
@@ -23,7 +24,7 @@ class AuthorizationViewModel : ViewModel() {
     val emailIsVerificated: LiveData<Boolean>
         get() = _emailIsVerificated
 
-    private val db = RetrofitClient.getRetrofitService().create(AuthorizationService::class.java)
+    private val db = RetrofitClient.getRetrofitAuthService().create(AuthorizationService::class.java)
 
     private fun showArrayError(array: Array<String>) {
         array.forEach { ErrorObserver.showErrorMessage(it) }
@@ -33,7 +34,9 @@ class AuthorizationViewModel : ViewModel() {
         db.login(SignInModel(email, password)).enqueue(object : Callback<ResponceAuthorizatinoModel> {
             override fun onResponse(call: Call<ResponceAuthorizatinoModel>, response: Response<ResponceAuthorizatinoModel>) {
                 if (response.body() != null) {
-                    _token.value = response.body()!!.data.token
+                    val token = response.body()!!.data.token
+                    ServiceInterceptor.token = token
+                    _token.value = token
                 } else {
                     ErrorObserver.showErrorMessage("Пользователь не авторизован")
                 }
@@ -74,7 +77,7 @@ class AuthorizationViewModel : ViewModel() {
     }
 
     fun verificationEmail(code: String, token: String) = viewModelScope.launch {
-        db.verificationEmail(VerificationModel(code), "Bearer $token")
+        db.verificationEmail(VerificationModel(code))
             .enqueue(object : Callback<ResponceVerificationModel> {
                 override fun onResponse(
                     call: Call<ResponceVerificationModel>,
