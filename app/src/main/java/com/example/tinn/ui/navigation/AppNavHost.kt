@@ -5,10 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.tinn.ui.features.MainScreen
 import com.example.tinn.ui.features.RegisterScreen
 import com.example.tinn.ui.features.SignInScreen
 import com.example.tinn.ui.features.VerificationEmailScreen
+import com.example.tinn.ui.features.main.MainScreen
 
 @Composable
 fun AppNavHost(
