@@ -41,7 +41,7 @@ fun UserInputInfoScreen(navController: NavController) {
             TextFieldsWithLabelError(
                 value = phone,
                 modifier = Modifier.width(221.dp),
-                onValueChange = { phone = it },
+                onValueChange = { if (phone.length < 10) phone = it },
                 visualTransformation = PhoneNumberVisualTranformation("+7-000-000-00-00", '0'),
                 labelText = "Телефон",
             )
