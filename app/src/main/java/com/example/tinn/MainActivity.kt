@@ -72,7 +72,7 @@ private inline fun getStartDestination(statusAuthorization: String): String {
     return when (statusAuthorization) {
         IS_AUTHORIZATION -> Screens.Main.route
         INPUT_INFO_USER -> Screens.InputInfoUser.route
-        VERIFICATION_EMAIL -> Screens.ConfirmEmail.route
+        VERIFICATION_EMAIL -> Screens.Main.route
         else -> Screens.SignIn.route
     }
 }
