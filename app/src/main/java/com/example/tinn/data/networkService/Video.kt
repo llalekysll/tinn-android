@@ -1,6 +1,7 @@
 package com.example.tinn.data.networkService
 
 import com.example.tinn.data.emptities.Comment
+import com.example.tinn.data.modelForJSON.ResponceModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -18,11 +19,11 @@ interface Video {
     ): Call<Comment>
 
     @GET("video")
-    fun getVideo(@Header("Authorization") token: String): Call<List<Video>>
+    fun getVideo(@Header("Authorization") token: String): Call<ResponceModel<Video>>
 
     @GET("video/recommended")
-    fun getRecommendedVideo(@Header("Authorization") token: String): Call<List<Video>>
+    fun getRecommendedVideo(@Header("Authorization") token: String): Call<ResponceModel<Video>>
 
     @GET("video/popular")
-    fun getPopularVideo(@Header("Authorization") token: String): Call<List<Video>>
+    fun getPopularVideo(@Header("Authorization") token: String): Call<ResponceModel<Video>>
 }
