@@ -8,10 +8,10 @@ import retrofit2.http.POST
 
 interface AuthorizationService {
     @POST("register")
-    fun register(@Body registerModel: RegisterModel): Call<ResponceModel>
+    fun register(@Body registerModel: RegisterModel): Call<ResponceAuthorizatinoModel>
 
     @POST("login")
-    fun login(@Body signInModel: SignInModel): Call<ResponceModel>
+    fun login(@Body signInModel: SignInModel): Call<ResponceAuthorizatinoModel>
 
     @POST("verification/email")
     fun verificationEmail(

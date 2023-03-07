@@ -15,13 +15,13 @@ data class SignInModel (
     val password: String,
 )
 
-data class ResponceModel(
+data class ResponceAuthorizatinoModel(
     val success: Boolean = false,
     val message: String = "",
-    val data: ResponceDataModel = ResponceDataModel()
+    val data: ResponceDataAuthorizationModel = ResponceDataAuthorizationModel()
 )
 
-data class ResponceDataModel(
+data class ResponceDataAuthorizationModel(
     val token: String = "",
     val email: Array<String> = emptyArray(),
     val password: Array<String> = emptyArray(),

@@ -30,8 +30,8 @@ class AuthorizationViewModel : ViewModel() {
     }
 
     fun signIn(email: String, password: String) = viewModelScope.launch {
-        db.login(SignInModel(email, password)).enqueue(object : Callback<ResponceModel> {
-            override fun onResponse(call: Call<ResponceModel>, response: Response<ResponceModel>) {
+        db.login(SignInModel(email, password)).enqueue(object : Callback<ResponceAuthorizatinoModel> {
+            override fun onResponse(call: Call<ResponceAuthorizatinoModel>, response: Response<ResponceAuthorizatinoModel>) {
                 if (response.body() != null) {
                     _token.value = response.body()!!.data.token
                 } else {
@@ -39,7 +39,7 @@ class AuthorizationViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ResponceModel>, t: Throwable) {
+            override fun onFailure(call: Call<ResponceAuthorizatinoModel>, t: Throwable) {
                 ErrorObserver.showErrorMessage(t.message.toString())
             }
         })
@@ -47,17 +47,17 @@ class AuthorizationViewModel : ViewModel() {
 
     fun register(email: String, password: String, code: String) = viewModelScope.launch {
         db.register(RegisterModel(email, password, password, code))
-            .enqueue(object : Callback<ResponceModel> {
+            .enqueue(object : Callback<ResponceAuthorizatinoModel> {
                 override fun onResponse(
-                    call: Call<ResponceModel>,
-                    response: Response<ResponceModel>
+                    call: Call<ResponceAuthorizatinoModel>,
+                    response: Response<ResponceAuthorizatinoModel>
                 ) {
                         if (response.body() != null) {
                             _token.value = response.body()!!.data.token
                         } else {
                             val gson = Gson()
-                            val type = object : TypeToken<ResponceModel>() {}.type
-                            val errorResponse: ResponceModel? =
+                            val type = object : TypeToken<ResponceAuthorizatinoModel>() {}.type
+                            val errorResponse: ResponceAuthorizatinoModel? =
                                 gson.fromJson(response.errorBody()!!.charStream(), type)
 
                             val data = errorResponse!!.data
@@ -67,7 +67,7 @@ class AuthorizationViewModel : ViewModel() {
                         }
                     }
 
-                override fun onFailure(call: Call<ResponceModel>, t: Throwable) {
+                override fun onFailure(call: Call<ResponceAuthorizatinoModel>, t: Throwable) {
                     ErrorObserver.showErrorMessage(t.message.toString())
                 }
             })
