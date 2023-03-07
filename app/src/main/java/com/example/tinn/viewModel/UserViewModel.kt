@@ -13,9 +13,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UserViewModel : ViewModel() {
-    private val _requestIsSuccess = MutableLiveData<Boolean>(null)
-    val requestIsSuccess: LiveData<Boolean>
-        get() = _requestIsSuccess
+    private val _requestStatus = MutableLiveData<String>("")
+    val requestStatus: LiveData<String>
+        get() = _requestStatus
 
     private val db = RetrofitClient.getRetrofitService().create(UserService::class.java)
 
@@ -28,7 +28,7 @@ class UserViewModel : ViewModel() {
         dateOfBirth: String,
         token: String?,
     ) {
-        _requestIsSuccess.value = null
+        _requestStatus.value = "LOADING"
         val date = SimpleDateFormat("ddMMyyyy").parse(dateOfBirth)
 
         if (date != null) {
@@ -46,17 +46,17 @@ class UserViewModel : ViewModel() {
                     call: Call<ResponceDataUserModel>,
                     response: Response<ResponceDataUserModel>
                 ) {
-                    _requestIsSuccess.value = true
+                    _requestStatus.value = "OK"
                 }
 
                 override fun onFailure(call: Call<ResponceDataUserModel>, t: Throwable) {
-                    _requestIsSuccess.value = false
+                    _requestStatus.value = ""
                     ErrorObserver.showErrorMessage(t.message.toString())
                 }
             })
 
         } else {
-            _requestIsSuccess.value = false
+            _requestStatus.value = ""
             ErrorObserver.showErrorMessage("Дата рождения не валидна")
         }
 

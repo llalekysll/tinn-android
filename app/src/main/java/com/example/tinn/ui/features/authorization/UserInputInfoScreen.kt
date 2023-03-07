@@ -37,9 +37,9 @@ fun UserInputInfoScreen(navController: NavController) {
     val token = pref.getString(TOKEN, "")
 
     val viewModel: UserViewModel = viewModel()
-    val isShowMain by viewModel.requestIsSuccess.observeAsState()
+    val state by viewModel.requestStatus.observeAsState()
 
-    if (isShowMain == true) {
+    if (state == "OK") {
         pref.edit().putString(STATUS_AUTHORIZATION, IS_AUTHORIZATION).apply()
 
         navController.navigate(Screens.Main.route) {
@@ -50,8 +50,6 @@ fun UserInputInfoScreen(navController: NavController) {
             restoreState = true
         }
     }
-
-    if (isShowMain == null) CircularProgressIndicator()
 
     var login by remember { mutableStateOf("") }
     var firstName by remember { mutableStateOf("") }
@@ -67,6 +65,8 @@ fun UserInputInfoScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+
+        if (state == "LOADING") CircularProgressIndicator()
 
         Text(
             text = "Продолжите регистрацию",
