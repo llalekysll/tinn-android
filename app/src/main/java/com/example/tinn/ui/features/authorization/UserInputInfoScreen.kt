@@ -1,11 +1,20 @@
 package com.example.tinn.ui.features.authorization
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tinn.ui.components.TextFieldsWithLabelError
+import com.example.tinn.ui.theme.Blue
 import com.example.tinn.utils.DigitVisualTransformation
 
 @Composable
@@ -17,7 +26,19 @@ fun UserInputInfoScreen(navController: NavController) {
     var phone by remember { mutableStateOf("") }
     var dateOfBirth by remember { mutableStateOf("") }
 
-    Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+
+        Text(
+            text = "Продолжите регистрацию",
+            style = MaterialTheme.typography.h5,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
 
         TextFieldsWithLabelError(
             value = login,
@@ -53,7 +74,30 @@ fun UserInputInfoScreen(navController: NavController) {
                 visualTransformation = DigitVisualTransformation("00/00/0000", '0'),
                 labelText = "ДД/ММ/ГГГГ",
             )
+
+
         }
+        val annotatedString = buildAnnotatedString {
+            append("Нажимая на кнопку 'Регистрация' вы даете согласие на ")
+            pushStringAnnotation("обработку персональных данных", "https://tinn.io/main")
+            withStyle(SpanStyle(color = Blue)) {
+                append("обработку персональных данных")
+            }
+        }
+
+        ClickableText(
+            text = annotatedString,
+            modifier = Modifier.fillMaxWidth(),
+            onClick = { offset ->
+                annotatedString.getStringAnnotations(
+                    "обработку персональных данных",
+                    start = offset,
+                    end = offset
+                ).firstOrNull()?.let {
+
+                }
+            }
+        )
 
     }
 }
