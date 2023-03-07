@@ -22,7 +22,8 @@ import com.example.tinn.ui.components.AppButton
 import com.example.tinn.ui.components.TextFieldsWithLabelError
 import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.utils.AUTHORIZATION
-import com.example.tinn.utils.EMAIL_IS_CONFIRMATION
+import com.example.tinn.utils.INPUT_INFO_USER
+import com.example.tinn.utils.STATUS_AUTHORIZATION
 import com.example.tinn.utils.TOKEN
 import com.example.tinn.viewModel.AuthorizationViewModel
 
@@ -41,7 +42,7 @@ fun VerificationEmailScreen(navController: NavController) {
             AUTHORIZATION,
             Context.MODE_PRIVATE
         )
-        pref.edit().putBoolean(EMAIL_IS_CONFIRMATION, true).apply()
+        pref.edit().putString(STATUS_AUTHORIZATION, INPUT_INFO_USER).apply()
 
         navController.navigate(Screens.Main.route) {
             popUpTo(navController.graph.startDestinationId) {

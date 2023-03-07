@@ -21,10 +21,7 @@ import com.example.tinn.ui.components.CheckBoxWithLabel
 import com.example.tinn.ui.components.TextFieldEmail
 import com.example.tinn.ui.components.TextFieldPassword
 import com.example.tinn.ui.navigation.Screens
-import com.example.tinn.utils.AUTHORIZATION
-import com.example.tinn.utils.EMAIL_IS_CONFIRMATION
-import com.example.tinn.utils.TOKEN
-import com.example.tinn.utils.emailIfValid
+import com.example.tinn.utils.*
 import com.example.tinn.viewModel.AuthorizationViewModel
 
 @Composable
@@ -44,7 +41,7 @@ fun SignInScreen(navHostController: NavHostController) {
                 Context.MODE_PRIVATE
             )
             pref.edit().putString(TOKEN, token).apply()
-            pref.edit().putBoolean(EMAIL_IS_CONFIRMATION, true).apply()
+            pref.edit().putString(STATUS_AUTHORIZATION, VERIFICATION_EMAIL).apply()
         }
 
         navHostController.navigate(Screens.Main.route) {
