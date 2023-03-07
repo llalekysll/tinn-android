@@ -1,16 +1,12 @@
 package com.example.tinn.utils
 
-import android.os.Build
-import android.telephony.PhoneNumberUtils
-import android.view.animation.Transformation
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
-import java.util.*
 
-class PhoneNumberVisualTranformation(
+class DigitVisualTransformation(
     private val mask: String,
     private val maskNumber: Char
 ) : VisualTransformation {
@@ -52,5 +48,4 @@ private class PhoneOffsetMapper(val mask: String, val numberChar: Char) : Offset
 
     override fun transformedToOriginal(offset: Int): Int =
         offset - mask.take(offset).count { it != numberChar }
-
 }
