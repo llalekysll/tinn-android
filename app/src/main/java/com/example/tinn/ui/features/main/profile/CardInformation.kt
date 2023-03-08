@@ -43,8 +43,9 @@ fun CardInformation(navController: NavController, user: ResponceDataUserModel) {
                             " ${user.profileInfo.subscriptionsCount} подписчиков",
                     color = DarkGray
                 )
-            }
 
+            }
+            Pager()
         }
     }
 }
