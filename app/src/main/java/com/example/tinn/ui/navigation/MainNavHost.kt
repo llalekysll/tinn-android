@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.tinn.ui.features.main.profile.ProfileScreen
 
 @Composable
 fun MainNavHost(mainNavController: NavHostController, modifier: Modifier) {
@@ -15,7 +16,6 @@ fun MainNavHost(mainNavController: NavHostController, modifier: Modifier) {
         startDestination = MainScreens.Home.route
     ) {
         composable(MainScreens.Home.route) {
-
         }
 
         composable(MainScreens.Application.route) {
@@ -36,6 +36,10 @@ fun MainNavHost(mainNavController: NavHostController, modifier: Modifier) {
 
         composable(MainScreens.Marketplace.route) {
 
+        }
+
+        composable(MainScreens.Profile.route) {
+            ProfileScreen(mainNavController)
         }
     }
 }
