@@ -22,35 +22,38 @@ fun MainBottomNavigation(navController: NavController) {
     val destination = state.value?.destination
 
     destination?.let {
-        BottomNavigation(
-            backgroundColor = Color.White,
-            elevation = 16.dp
-        ) {
-            LazyRow() {
-                items(mainScreensList) { currentScreen ->
-                    val isSelected = destination.hierarchy.any { it.route == currentScreen.route }
-                    val color = if (isSelected) Blue else Color.Black
+        if (destination.route != MainScreens.Profile.route) {
+            BottomNavigation(
+                backgroundColor = Color.White,
+                elevation = 16.dp
+            ) {
+                LazyRow() {
+                    items(mainScreensList) { currentScreen ->
+                        val isSelected =
+                            destination.hierarchy.any { it.route == currentScreen.route }
+                        val color = if (isSelected) Blue else Color.Black
 
-                    BottomNavigationItem(
-                        selected = isSelected,
-                        onClick = {
-                            navController.navigate(currentScreen.route) {
-                                popUpTo(navController.graph.startDestinationId) {
-                                    saveState = true
+                        BottomNavigationItem(
+                            selected = isSelected,
+                            onClick = {
+                                navController.navigate(currentScreen.route) {
+                                    popUpTo(navController.graph.startDestinationId) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        },
-                        icon = {
-                            Icon(
-                                painter = painterResource(id = currentScreen.idIcon),
-                                contentDescription = currentScreen.label,
-                                tint = color
-                            )
-                        },
-                        label = { Text(text = currentScreen.label, color = color) },
-                    )
+                            },
+                            icon = {
+                                Icon(
+                                    painter = painterResource(id = currentScreen.idIcon!!),
+                                    contentDescription = currentScreen.label,
+                                    tint = color
+                                )
+                            },
+                            label = { Text(text = currentScreen.label, color = color) },
+                        )
+                    }
                 }
             }
         }
