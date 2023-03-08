@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.tinn.ui.components.Toolbar
 import com.example.tinn.ui.navigation.MainBottomNavigation
 import com.example.tinn.ui.navigation.MainNavHost
+import com.example.tinn.ui.navigation.MainScreens
 import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.utils.AUTHORIZATION
 
@@ -23,14 +24,17 @@ fun MainScreen(mainNavController: NavController) {
         topBar = { Toolbar(
             exit = {
                 pref.edit().clear().apply()
-                mainNavController.navigate(Screens.SignIn.route) {
+                navController.navigate(Screens.SignIn.route) {
                     popUpTo(navController.graph.startDestinationId) {
                         saveState = true
                     }
                     launchSingleTop = true
                     restoreState = true
                 }
-            }
+            },
+
+            openProfile = {navController.navigate(MainScreens.Profile.route)}
+
         ) },
         bottomBar = { MainBottomNavigation(navController = navController) }
     ) { paddingValues ->
