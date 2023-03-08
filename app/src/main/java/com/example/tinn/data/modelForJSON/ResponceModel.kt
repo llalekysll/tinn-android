@@ -4,9 +4,9 @@ import com.example.tinn.data.emptities.user.*
 import com.google.gson.annotations.SerializedName
 
 data class ResponceModel <T>(
-    val success: Boolean = false,
-    val errors: List<Any> = emptyList(),
-    val data: List<T> = emptyList()
+    val status: Boolean = false,
+    //val errors: List<Any> = emptyList(),
+    val data: T? = null
 )
 
 data class ResponceDataUserModel(
@@ -18,8 +18,8 @@ data class ResponceDataUserModel(
     @SerializedName("user_privacies")
     val userPrivacies: UserPrivacies = UserPrivacies(),
     val channel: Int? = null,
-    @SerializedName("user_subscriptions")
-    val userSubscriptions: Array<String> = arrayOf(),
+    //@SerializedName("user_subscriptions")
+    //val userSubscriptions: Array<String> = arrayOf(),
     @SerializedName("profile_info")
     val profileInfo: ProfileInfo = ProfileInfo()
 )
