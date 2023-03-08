@@ -1,10 +1,8 @@
 package com.example.tinn.ui.features.main.profile
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
@@ -13,14 +11,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tinn.ui.theme.AlphaBlack
-import com.example.tinn.ui.theme.Gray
 import com.example.tinn.viewModel.UserViewModel
 import com.skydoves.landscapist.glide.GlideImage
 import com.example.tinn.R
@@ -57,16 +53,7 @@ fun ProfileScreen(navController: NavController) {
                 )
             }
 
-            Card(
-                elevation = 16.dp,
-                shape = RoundedCornerShape(topEnd = 16.dp, topStart = 16.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .padding(top = 180.dp),
-            ) {
-
-            }
+            CardInformation(navController = navController, it)
         }
     }
 }
