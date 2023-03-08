@@ -24,7 +24,7 @@ fun MainScreen(mainNavController: NavController) {
         topBar = { Toolbar(
             exit = {
                 pref.edit().clear().apply()
-                navController.navigate(Screens.SignIn.route) {
+                mainNavController.navigate(Screens.SignIn.route) {
                     popUpTo(navController.graph.startDestinationId) {
                         saveState = true
                     }
