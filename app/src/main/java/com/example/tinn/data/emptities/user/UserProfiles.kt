@@ -12,6 +12,7 @@ data class UserProfiles(
     val secondName: String? = null,
     val phone: String? = null,
     val avatar: String? = null,
+    val background: String? = null,
     @SerializedName("gender_id")
     val genderId: Int? = null,
     val language: String? = null,
