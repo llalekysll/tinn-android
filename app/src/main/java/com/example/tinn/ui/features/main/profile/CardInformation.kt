@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,11 +39,18 @@ fun CardInformation(navController: NavController, user: ResponceDataUserModel) {
                 val avatar = user.userProfiles.avatar
                 Avatar(avatar)
 
-                Text(
-                    text = "${user.profileInfo.videosCount} видео |" +
-                            " ${user.profileInfo.subscriptionsCount} подписчиков",
-                    color = DarkGray
-                )
+                Column {
+                    Text(
+                        text = "${user.userProfiles.secondName} ${user.userProfiles.firstName}",
+                        style = MaterialTheme.typography.h5
+                    )
+
+                    Text(
+                        text = "${user.profileInfo.videosCount} видео |" +
+                                " ${user.profileInfo.subscriptionsCount} подписчиков",
+                        color = DarkGray
+                    )
+                }
 
             }
             Pager()
