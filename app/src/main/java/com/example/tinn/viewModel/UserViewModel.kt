@@ -1,17 +1,26 @@
 package com.example.tinn.viewModel
 
+import android.net.Uri
+import androidx.core.net.toFile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.tinn.data.modelForJSON.ProfileModel
 import com.example.tinn.data.modelForJSON.ResponceDataUserModel
 import com.example.tinn.data.modelForJSON.ResponceModel
 import com.example.tinn.data.networkService.RetrofitClient
 import com.example.tinn.data.networkService.UserService
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
-import java.text.SimpleDateFormat
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.text.SimpleDateFormat
+
 
 class UserViewModel : ViewModel() {
     private val _requestStatus = MutableLiveData<String>("")
@@ -89,6 +98,23 @@ class UserViewModel : ViewModel() {
             override fun onFailure(call: Call<ResponceModel<ResponceDataUserModel>>, t: Throwable) {
                 ErrorObserver.showErrorMessage(t.message.toString())
             }
+        })
+    }
+
+    fun loadAvatar(uri: Uri) {
+        _requestStatus.value = "LOAD"
+        val file = uri.toFile()
+        val requestBody = file.asRequestBody()
+        val partFile = MultipartBody.Part.createFormData("image", file.name, requestBody)
+        db.loadAvatar(partFile).enqueue(object : Callback<Any> {
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                _requestStatus.value = "OK"
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                ErrorObserver.showErrorMessage(t.message.toString())
+            }
+
         })
     }
 }
