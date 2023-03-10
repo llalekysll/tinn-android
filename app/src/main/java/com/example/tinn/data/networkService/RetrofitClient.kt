@@ -24,16 +24,16 @@ object RetrofitClient {
     }
 
     fun getRetrofitAuthService(): Retrofit {
-        if (retrofitService == null) {
+        if (retrofitAuthService == null) {
             val client = OkHttpClient.Builder().addInterceptor(ServiceInterceptor).build()
 
-            retrofitService = Retrofit.Builder()
+            retrofitAuthService = Retrofit.Builder()
                 .baseUrl("https://auth.tinn.io/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
         }
 
-        return retrofitService!!
+        return retrofitAuthService!!
     }
 }
