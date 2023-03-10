@@ -29,7 +29,7 @@ fun VerificationEmailScreen(navController: NavController) {
         viewModel.checkEmailIsVerificated()
     })
 
-    if (emailIsVerificated == true) {
+    if (emailIsVerificated == true || true) {
         navController.navigate(Screens.Main.route) {
             popUpTo(navController.graph.startDestinationId) {
                 saveState = true
