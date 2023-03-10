@@ -41,7 +41,6 @@ fun SignInScreen(navHostController: NavHostController) {
                 Context.MODE_PRIVATE
             )
             pref.edit().putString(TOKEN, token).apply()
-            pref.edit().putString(STATUS_AUTHORIZATION, VERIFICATION_EMAIL).apply()
         }
 
         navHostController.navigate(Screens.Main.route) {

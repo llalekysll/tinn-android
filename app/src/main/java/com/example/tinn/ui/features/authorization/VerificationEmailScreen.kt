@@ -33,14 +33,11 @@ fun VerificationEmailScreen(navController: NavController) {
     val viewModel = viewModel(AuthorizationViewModel::class.java)
     val emailIsVerificated by viewModel.emailIsVerificated.observeAsState(false)
 
-    if (emailIsVerificated) {
-        val context = LocalContext.current
-        val pref = context.applicationContext.getSharedPreferences (
-            AUTHORIZATION,
-            Context.MODE_PRIVATE
-        )
-        pref.edit().putString(STATUS_AUTHORIZATION, INPUT_INFO_USER).apply()
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.checkEmailIsVerificated()
+    })
 
+    if (emailIsVerificated == true) {
         navController.navigate(Screens.Main.route) {
             popUpTo(navController.graph.startDestinationId) {
                 saveState = true
