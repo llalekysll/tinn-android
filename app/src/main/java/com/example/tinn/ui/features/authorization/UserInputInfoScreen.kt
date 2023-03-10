@@ -70,18 +70,21 @@ fun UserInputInfoScreen(navController: NavController) {
         TextFieldsWithLabelError(
             value = login,
             onValueChange = { login = it },
+            modifier = Modifier.fillMaxWidth(),
             labelText = "Логин"
         )
 
         TextFieldsWithLabelError(
             value = firstName,
             onValueChange = { firstName = it },
+            modifier = Modifier.fillMaxWidth(),
             labelText = "Имя",
         )
 
         TextFieldsWithLabelError(
             value = secondName,
             onValueChange = { secondName = it },
+            modifier = Modifier.fillMaxWidth(),
             labelText = "Фамилия",
         )
 
