@@ -1,11 +1,9 @@
 package com.example.tinn.data.networkService
 
+import com.example.tinn.data.emptities.user.AuthUser
 import com.example.tinn.data.modelForJSON.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface AuthorizationService {
     @Headers("No-Authentication: true")
@@ -20,4 +18,7 @@ interface AuthorizationService {
     fun verificationEmail(
         @Body verificationModel: VerificationModel,
     ): Call<ResponceVerificationModel>
+
+    @GET("api/user")
+    fun getUser(): Call<AuthUser>
 }
