@@ -8,7 +8,9 @@ data class UserProfiles(
     @SerializedName("user_id")
     val userId: Int? = null,
     val login: String? = null,
+    @SerializedName("first_name")
     val firstName: String? = null,
+    @SerializedName("second_name")
     val secondName: String? = null,
     val phone: String? = null,
     val avatar: String? = null,
