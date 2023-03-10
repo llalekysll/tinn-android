@@ -12,12 +12,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.tinn.data.networkService.ServiceInterceptor
 import com.example.tinn.ui.theme.TinnTheme
 import com.example.tinn.ui.navigation.AppNavHost
 import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.utils.*
+import com.example.tinn.viewModel.AuthorizationViewModel
 import com.example.tinn.viewModel.ErrorObserver
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -26,31 +28,45 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TinnTheme {
+                val viewModel: AuthorizationViewModel = viewModel()
                 val stateUI = rememberSystemUiController()
                 stateUI.setStatusBarColor(MaterialTheme.colors.background)
 
                 val pref = LocalContext.current.getSharedPreferences(AUTHORIZATION, MODE_PRIVATE)
 
                 val token = pref.getString(TOKEN, "")
-                if (!token.isNullOrEmpty()) ServiceInterceptor.token = token
+                var startDestination = if (!token.isNullOrEmpty()) {
+                    ServiceInterceptor.token = token
+                    viewModel.checkEmailIsVerificated()
+                    ""
+                } else {
+                    Screens.SignIn.route
+                }
 
-                val statusAuthorization = pref.getString(STATUS_AUTHORIZATION, "")
-                val startDestination = getStartDestination(statusAuthorization!!)
+                val emailState by viewModel.emailIsVerificated.observeAsState(null)
+                emailState?.let {
+                    startDestination = if (it) Screens.Main.route
+                    else Screens.ConfirmEmail.route
+                }
 
-                val navController = rememberNavController()
-                val snackbarHostState = remember { SnackbarHostState() }
-                ObserverErrorMessage(snackbarHostState)
+                if (startDestination.isNotEmpty()) {
+                    val navController = rememberNavController()
+                    val snackbarHostState = remember { SnackbarHostState() }
+                    ObserverErrorMessage(snackbarHostState)
 
-                Scaffold(
-                    snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
-                    content = { padding ->
-                        AppNavHost(
-                            navController = navController,
-                            startDestination = startDestination,
-                            modifier = Modifier.padding(padding)
-                        )
-                    }
-                )
+                    Scaffold(
+                        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+                        content = { padding ->
+                            AppNavHost(
+                                navController = navController,
+                                startDestination = startDestination,
+                                modifier = Modifier.padding(padding)
+                            )
+                        }
+                    )
+                } else {
+                    CircularProgressIndicator()
+                }
             }
         }
     }
@@ -66,13 +82,4 @@ private fun ObserverErrorMessage(snackBarState: SnackbarHostState) {
             if (message.isNotEmpty()) snackBarState.showSnackbar(message)
         }
     })
-}
-
-private inline fun getStartDestination(statusAuthorization: String): String {
-    return when (statusAuthorization) {
-        IS_AUTHORIZATION -> Screens.Main.route
-        INPUT_INFO_USER -> Screens.InputInfoUser.route
-        VERIFICATION_EMAIL -> Screens.Main.route
-        else -> Screens.SignIn.route
-    }
 }
