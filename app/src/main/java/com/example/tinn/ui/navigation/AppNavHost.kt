@@ -9,7 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.tinn.ui.features.RegisterScreen
 import com.example.tinn.ui.features.SignInScreen
-import com.example.tinn.ui.features.VerificationEmailScreen
+import com.example.tinn.ui.features.authorization.VerificationEmailScreen
 import com.example.tinn.ui.features.authorization.UserInputInfoScreen
 import com.example.tinn.ui.features.main.MainScreen
 

@@ -34,12 +34,7 @@ fun UserInputInfoScreen(navController: NavController) {
     val viewModel: UserViewModel = viewModel()
     val state by viewModel.requestStatus.observeAsState()
 
-    val pref = LocalContext.current.getSharedPreferences(
-        AUTHORIZATION, ComponentActivity.MODE_PRIVATE
-    )
     if (state == "OK") {
-        pref.edit().putString(STATUS_AUTHORIZATION, IS_AUTHORIZATION).apply()
-
         navController.navigate(Screens.Main.route) {
             popUpTo(navController.graph.startDestinationId) {
                 saveState = true

@@ -1,7 +1,5 @@
-package com.example.tinn.ui.features
+package com.example.tinn.ui.features.authorization
 
-import android.content.Context
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -10,7 +8,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -18,14 +15,9 @@ import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tinn.R
-import com.example.tinn.data.networkService.ServiceInterceptor
 import com.example.tinn.ui.components.AppButton
 import com.example.tinn.ui.components.TextFieldsWithLabelError
 import com.example.tinn.ui.navigation.Screens
-import com.example.tinn.utils.AUTHORIZATION
-import com.example.tinn.utils.INPUT_INFO_USER
-import com.example.tinn.utils.STATUS_AUTHORIZATION
-import com.example.tinn.utils.TOKEN
 import com.example.tinn.viewModel.AuthorizationViewModel
 
 @Composable

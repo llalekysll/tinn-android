@@ -9,9 +9,6 @@ import com.example.tinn.data.modelForJSON.*
 import com.example.tinn.data.networkService.AuthorizationService
 import com.example.tinn.data.networkService.RetrofitClient
 import com.example.tinn.data.networkService.ServiceInterceptor
-import com.example.tinn.utils.LOADING
-import com.example.tinn.utils.VERIFICATION_IS_EMAIL
-import com.example.tinn.utils.VERIFICATION_IS_NOT_EMAIL
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import retrofit2.Callback
