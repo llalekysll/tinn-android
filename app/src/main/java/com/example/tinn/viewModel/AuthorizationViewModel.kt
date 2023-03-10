@@ -4,10 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tinn.data.emptities.user.AuthUser
 import com.example.tinn.data.modelForJSON.*
 import com.example.tinn.data.networkService.AuthorizationService
 import com.example.tinn.data.networkService.RetrofitClient
 import com.example.tinn.data.networkService.ServiceInterceptor
+import com.example.tinn.utils.LOADING
+import com.example.tinn.utils.VERIFICATION_IS_EMAIL
+import com.example.tinn.utils.VERIFICATION_IS_NOT_EMAIL
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import retrofit2.Callback
@@ -20,11 +24,12 @@ class AuthorizationViewModel : ViewModel() {
     val token: LiveData<String>
         get() = _token
 
-    private val _emailIsVerificated = MutableLiveData(false)
-    val emailIsVerificated: LiveData<Boolean>
+    private val _emailIsVerificated = MutableLiveData<Boolean?>(null)
+    val emailIsVerificated: LiveData<Boolean?>
         get() = _emailIsVerificated
 
-    private val db = RetrofitClient.getRetrofitAuthService().create(AuthorizationService::class.java)
+    private val db =
+        RetrofitClient.getRetrofitAuthService().create(AuthorizationService::class.java)
 
     private fun showArrayError(array: Array<String>) {
         array.forEach { ErrorObserver.showErrorMessage(it) }
@@ -84,15 +89,33 @@ class AuthorizationViewModel : ViewModel() {
                     response: Response<ResponceVerificationModel>
                 ) {
                     response.body()?.let {
-                        if (it.getStatus()) _emailIsVerificated.value = it.getStatus()
-                        else ErrorObserver.showErrorMessage("Код не верен")
+                        if (it.getStatus()) _emailIsVerificated.value = true
+                        else {
+                            ErrorObserver.showErrorMessage("Код не верен")
+                            _emailIsVerificated.value = false
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<ResponceVerificationModel>, t: Throwable) {
+                    _emailIsVerificated.value = false
                     ErrorObserver.showErrorMessage(t.message.toString())
                 }
 
             })
+    }
+
+    fun checkEmailIsVerificated() = viewModelScope.launch {
+        db.getUser().enqueue(object : Callback<AuthUser> {
+            override fun onResponse(call: Call<AuthUser>, response: Response<AuthUser>) {
+                _emailIsVerificated.value = response.body()?.email_verified_at != null
+            }
+
+            override fun onFailure(call: Call<AuthUser>, t: Throwable) {
+                ErrorObserver.showErrorMessage(t.message.toString())
+                _emailIsVerificated.value = false
+            }
+
+        })
     }
 }
