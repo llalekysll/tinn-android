@@ -32,11 +32,8 @@ fun ProfileScreen(navController: NavController) {
 
     user?.let {
         Box(contentAlignment = Alignment.TopEnd) {
-            val url = if (it.userProfiles.background != null) {
-                it.userProfiles.background
-            } else {
-                "https://s0.rbk.ru/v6_top_pics/media/img/9/16/756619467602169.jpg"
-            }
+            val url = it.userProfiles.background
+                ?: "https://s0.rbk.ru/v6_top_pics/media/img/9/16/756619467602169.jpg"
 
             GlideImage(
                 modifier = Modifier
