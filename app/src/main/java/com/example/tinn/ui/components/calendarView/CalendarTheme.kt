@@ -3,12 +3,16 @@ package com.example.tinn.ui.components.calendarView
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tinn.ui.theme.Alpha
+import com.example.tinn.ui.theme.Blue
+import com.example.tinn.ui.theme.LightBlue
 
 data class CalendarAlertDialogTheme (
     val backgroundColor: Color = Color(0, 0, 0, 0),
@@ -23,8 +27,11 @@ data class CalendarTheme(
 )
 
 data class CalendarHeaderTheme(
-    val headerBackgroundColor: Color = Color(0, 0, 0, 0),
+    val headerBackgroundColor: Color = Blue,
+    val headerMonthBackgroundColor: Color = White,
     val headerTextColor: Color = Color(0xFF494949),
+    val headerUnSelectedModeColor: Color = LightBlue,
+    val headerSelectedModeColor: Color = White,
     val headerTextStyle: TextStyle = TextStyle.Default,
     val headerTextSize: TextUnit = 24.sp,
     val headerTextWeight: FontWeight = FontWeight.Bold
