@@ -1,6 +1,5 @@
 package com.example.tinn.ui.components.calendarView
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -11,13 +10,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import com.example.tinn.ui.components.calendarView.calendarHeader.CalendarHeader
 import com.example.tinn.utils.getDate
 import com.example.tinn.utils.getDayOfWeek
 import com.example.tinn.utils.getMonth
 import java.util.*
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CalendarView(
     calendarTheme: CalendarTheme = CalendarTheme(),
@@ -25,6 +24,7 @@ fun CalendarView(
     changeSelectedDate: (calendar: Calendar) -> Unit
 ) {
     var currentDate = remember { mutableStateOf(Calendar.getInstance()) }
+    var currentMode by remember { mutableStateOf("month") }
     var days by remember { mutableStateOf(mutableListOf<Calendar>()) }
     val weeks = listOf("Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс")
 
@@ -35,6 +35,8 @@ fun CalendarView(
             .background(calendarTheme.backgroundColor)
     ) {
         CalendarHeader(
+            currentMode = currentMode,
+            changeMode = { currentMode = it },
             currentDate = currentDate,
             theme = calendarTheme.calendarHeaderTheme
         )
