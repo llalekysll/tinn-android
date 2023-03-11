@@ -4,7 +4,6 @@ import android.net.Uri
 import androidx.core.net.toFile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.tinn.data.modelForJSON.*
 import com.example.tinn.data.networkService.RetrofitClient
@@ -21,7 +20,7 @@ typealias status = StatusRequestFactory.StatusRequestModel<Any>
 
 class UserViewModel : ViewModel() {
 
-    private val _requestStatus = MutableLiveData<status>(StatusRequestFactory.getNone())
+    private val _requestStatus = MutableLiveData(StatusRequestFactory.getNone())
     val requestStatus: LiveData<status>
         get() = _requestStatus
 
@@ -37,7 +36,11 @@ class UserViewModel : ViewModel() {
                 call: Call<ResponceModel<ResponceDataGendersModel>>,
                 response: Response<ResponceModel<ResponceDataGendersModel>>
             ) {
-                _requestStatus.value = StatusRequestFactory.getSuccess(response.body())
+                val genders = response.body()?.data?.user_genders
+
+                genders?.let {
+                    _requestStatus.value = StatusRequestFactory.getSuccess(genders, "gender")
+                }
             }
 
             override fun onFailure(
@@ -77,7 +80,8 @@ class UserViewModel : ViewModel() {
                     call: Call<ResponceDataUserModel>,
                     response: Response<ResponceDataUserModel>
                 ) {
-                    _requestStatus.value = StatusRequestFactory.getSuccess(response.body())
+                    _requestStatus.value =
+                        StatusRequestFactory.getSuccess(response.body(), "putUser")
                 }
 
                 override fun onFailure(call: Call<ResponceDataUserModel>, t: Throwable) {
@@ -126,7 +130,8 @@ class UserViewModel : ViewModel() {
         val partFile = MultipartBody.Part.createFormData("image", file.name, requestBody)
         db.loadAvatar(partFile).enqueue(object : Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
-                _requestStatus.value = StatusRequestFactory.getSuccess(response.body())
+                _requestStatus.value =
+                    StatusRequestFactory.getSuccess(response.body())
             }
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
