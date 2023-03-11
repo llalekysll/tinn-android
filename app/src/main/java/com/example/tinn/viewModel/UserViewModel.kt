@@ -55,7 +55,7 @@ class UserViewModel : ViewModel() {
         login: String,
         firstName: String,
         secondName: String,
-        sex: String,
+        sex: Int,
         phone: String,
         dateOfBirth: String,
     ) {
@@ -67,7 +67,7 @@ class UserViewModel : ViewModel() {
                 login = login,
                 firstName = firstName,
                 secondName = secondName,
-                genderId = if (sex == "Мужской") 0 else 1,
+                genderId = sex,
                 phone = phone,
                 dataOfBirth = date
             )
