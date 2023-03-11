@@ -1,4 +1,4 @@
-package com.example.calendar.calendarView
+package com.example.tinn.ui.components.calendarView
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.calendar.R
+import com.example.tinn.R
 import java.text.SimpleDateFormat
 import java.util.*
 

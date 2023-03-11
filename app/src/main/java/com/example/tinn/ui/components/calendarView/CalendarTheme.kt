@@ -1,4 +1,4 @@
-package com.example.calendar.calendarView
+package com.example.tinn.ui.components.calendarView
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape

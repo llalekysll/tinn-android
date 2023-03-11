@@ -1,4 +1,4 @@
-package com.example.calendar.calendarView
+package com.example.tinn.ui.components.calendarView
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -11,9 +11,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import com.example.calendar.util.getDate
-import com.example.calendar.util.getDayOfWeek
-import com.example.calendar.util.getMonth
+import com.example.tinn.utils.getDate
+import com.example.tinn.utils.getDayOfWeek
+import com.example.tinn.utils.getMonth
 import java.util.*
 
 
