@@ -17,19 +17,20 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tinn.R
+import com.example.tinn.data.modelForJSON.Gender
 import com.example.tinn.ui.theme.Alpha
 import com.example.tinn.ui.theme.DarkGray
 
 @Composable
 fun Spinner(
-    items: List<String>,
+    items: List<Gender>,
     hint: String,
     hintColor: Color = Color.Gray,
     textColor: Color = Color.Black,
     borderColor: Color = Alpha,
     fontSize: TextUnit = 18.sp,
     modifier: Modifier = Modifier.padding(top = 16.dp),
-    onClick: (item: String) -> Unit
+    onClick: (item: Gender) -> Unit
 ) {
     var isExpand by remember { mutableStateOf(false) }
 
@@ -67,7 +68,7 @@ fun Spinner(
                     isExpand = false
                     onClick(item)
                 }) {
-                    Text(text = item, color = hintColor)
+                    Text(text = item.title, color = hintColor)
                 }
             }
         }
