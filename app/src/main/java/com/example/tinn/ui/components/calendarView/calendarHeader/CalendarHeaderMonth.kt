@@ -1,10 +1,8 @@
 package com.example.tinn.ui.components.calendarView
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -19,18 +17,20 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable
-fun CalendarHeader(
-    currentDate: MutableState<Calendar>,
-    theme: CalendarHeaderTheme
+fun CalendarHeaderMonth(
+    currentDate: MutableState<Calendar>, theme: CalendarHeaderTheme
 ) {
     val header = SimpleDateFormat("LLLL, yyyy", Locale("ru")).format(currentDate.value.time)
 
     theme.apply {
 
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(headerMonthBackgroundColor)
+                .padding(bottom = 16.dp)
         ) {
             ButtonForChangeCurrentMonth(
                 currentDate = currentDate,
@@ -60,13 +60,9 @@ fun CalendarHeader(
 
 @Composable
 private fun ButtonForChangeCurrentMonth(
-    currentDate: MutableState<Calendar>,
-    iconId: Int,
-    color: Color,
-    index: Int
+    currentDate: MutableState<Calendar>, iconId: Int, color: Color, index: Int
 ) {
-    Icon(
-        painter = painterResource(id = iconId),
+    Icon(painter = painterResource(id = iconId),
         contentDescription = "change month",
         tint = color,
         modifier = Modifier
@@ -75,6 +71,5 @@ private fun ButtonForChangeCurrentMonth(
                 val tempDate = currentDate.value.clone() as Calendar
                 tempDate.add(Calendar.MONTH, index)
                 currentDate.value = tempDate
-            }
-    )
+            })
 }
