@@ -10,10 +10,11 @@ object StatusRequestFactory {
 
     data class StatusRequestModel<T>(
         val status: StatusType = StatusType.NONE,
-        val body: T? = null
+        val body: T? = null,
+        val key: String = ""
     )
 
-    fun <T> getSuccess(body: T?) = StatusRequestModel(StatusType.SUCCESS, body)
+    fun <T> getSuccess(body: T?, key: String = "") = StatusRequestModel(StatusType.SUCCESS, body, key)
 
     fun getNone() = StatusRequestModel<Any>()
 
