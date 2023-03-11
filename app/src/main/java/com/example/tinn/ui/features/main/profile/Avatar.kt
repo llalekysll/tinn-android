@@ -20,10 +20,12 @@ import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tinn.R
+import com.example.tinn.utils.StatusRequestFactory
 import com.example.tinn.viewModel.UserViewModel
 import com.skydoves.landscapist.glide.GlideImage
 
-@OptIn(ExperimentalTextApi::class)
+typealias status = StatusRequestFactory.StatusType
+
 @Composable
 fun Avatar(avatar: String?) {
     val viewModel: UserViewModel = viewModel()
@@ -41,10 +43,10 @@ fun Avatar(avatar: String?) {
     }
 
     val statusRequest by viewModel.requestStatus.observeAsState()
-    if (statusRequest == "OK") {
+    if (statusRequest?.status == status.SUCCESS) {
 
     }
-    if (statusRequest == "LOAD") CircularProgressIndicator()
+    if (statusRequest?.status == status.LOADING) CircularProgressIndicator()
 
     if (avatar != null) {
         GlideImage(
