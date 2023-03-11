@@ -11,20 +11,20 @@ import com.example.tinn.data.modelForJSON.ResponceDataUserModel
 import com.example.tinn.data.modelForJSON.ResponceModel
 import com.example.tinn.data.networkService.RetrofitClient
 import com.example.tinn.data.networkService.UserService
-import okhttp3.MediaType
+import com.example.tinn.utils.StatusRequestFactory
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
 import java.text.SimpleDateFormat
 
+typealias status = StatusRequestFactory.StatusRequestModel<Any>
 
 class UserViewModel : ViewModel() {
-    private val _requestStatus = MutableLiveData<String>("")
-    val requestStatus: LiveData<String>
+
+    private val _requestStatus = MutableLiveData<status>(StatusRequestFactory.getNone())
+    val requestStatus: LiveData<status>
         get() = _requestStatus
 
     private val _userInfo = MutableLiveData<ResponceDataUserModel?>(null)
@@ -41,7 +41,7 @@ class UserViewModel : ViewModel() {
         phone: String,
         dateOfBirth: String,
     ) {
-        _requestStatus.value = "LOADING"
+        _requestStatus.value = StatusRequestFactory.getLoading()
         val date = SimpleDateFormat("ddMMyyyy").parse(dateOfBirth)
 
         if (date != null) {
@@ -59,17 +59,17 @@ class UserViewModel : ViewModel() {
                     call: Call<ResponceDataUserModel>,
                     response: Response<ResponceDataUserModel>
                 ) {
-                    _requestStatus.value = "OK"
+                    _requestStatus.value = StatusRequestFactory.getSuccess(response.body())
                 }
 
                 override fun onFailure(call: Call<ResponceDataUserModel>, t: Throwable) {
-                    _requestStatus.value = ""
+                    _requestStatus.value = StatusRequestFactory.getNone()
                     ErrorObserver.showErrorMessage(t.message.toString())
                 }
             })
 
         } else {
-            _requestStatus.value = ""
+            _requestStatus.value = StatusRequestFactory.getNone()
             ErrorObserver.showErrorMessage("Дата рождения не валидна")
         }
 
@@ -102,13 +102,13 @@ class UserViewModel : ViewModel() {
     }
 
     fun loadAvatar(uri: Uri) {
-        _requestStatus.value = "LOAD"
+        _requestStatus.value = StatusRequestFactory.getLoading()
         val file = uri.toFile()
         val requestBody = file.asRequestBody()
         val partFile = MultipartBody.Part.createFormData("image", file.name, requestBody)
         db.loadAvatar(partFile).enqueue(object : Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
-                _requestStatus.value = "OK"
+                _requestStatus.value = StatusRequestFactory.getSuccess(response.body())
             }
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
