@@ -16,3 +16,8 @@ data class ProfileModel(
     @SerializedName("data_of_birth")
     val dataOfBirth: Date,
 )
+
+data class Gender(
+    val title: String = "",
+    val id: Int = 0,
+)

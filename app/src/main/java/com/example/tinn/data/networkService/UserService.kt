@@ -1,6 +1,7 @@
 package com.example.tinn.data.networkService
 
 import com.example.tinn.data.modelForJSON.ProfileModel
+import com.example.tinn.data.modelForJSON.ResponceDataGendersModel
 import com.example.tinn.data.modelForJSON.ResponceDataUserModel
 import com.example.tinn.data.modelForJSON.ResponceModel
 import okhttp3.MultipartBody
@@ -19,6 +20,9 @@ interface UserService {
 
     @PUT("profile/user")
     fun putUser(@Body profileModel: ProfileModel, ): Call<ResponceDataUserModel>
+
+    @GET("profile/genders")
+    fun getGenders(): Call<ResponceModel<ResponceDataGendersModel>>
 
     @Multipart
     @POST("profile/avatar")

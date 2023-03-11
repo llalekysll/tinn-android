@@ -6,9 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import com.example.tinn.data.modelForJSON.ProfileModel
-import com.example.tinn.data.modelForJSON.ResponceDataUserModel
-import com.example.tinn.data.modelForJSON.ResponceModel
+import com.example.tinn.data.modelForJSON.*
 import com.example.tinn.data.networkService.RetrofitClient
 import com.example.tinn.data.networkService.UserService
 import com.example.tinn.utils.StatusRequestFactory
@@ -32,6 +30,26 @@ class UserViewModel : ViewModel() {
         get() = _userInfo
 
     private val db = RetrofitClient.getRetrofitService().create(UserService::class.java)
+
+    fun getGender() {
+        db.getGenders().enqueue(object : Callback<ResponceModel<ResponceDataGendersModel>> {
+            override fun onResponse(
+                call: Call<ResponceModel<ResponceDataGendersModel>>,
+                response: Response<ResponceModel<ResponceDataGendersModel>>
+            ) {
+                _requestStatus.value = StatusRequestFactory.getSuccess(response.body())
+            }
+
+            override fun onFailure(
+                call: Call<ResponceModel<ResponceDataGendersModel>>,
+                t: Throwable
+            ) {
+                _requestStatus.value = StatusRequestFactory.getNone()
+                ErrorObserver.showErrorMessage("Дата рождения не валидна")
+            }
+
+        })
+    }
 
     fun putUserInfo(
         login: String,

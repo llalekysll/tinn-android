@@ -23,3 +23,7 @@ data class ResponceDataUserModel(
     @SerializedName("profile_info")
     val profileInfo: ProfileInfo = ProfileInfo()
 )
+
+data class ResponceDataGendersModel(
+    val user_genders: List<Gender> = emptyList()
+)
