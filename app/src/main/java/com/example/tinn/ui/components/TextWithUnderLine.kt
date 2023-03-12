@@ -27,7 +27,7 @@ fun TextWithUnderLine(
     lineColor: Color = Blue,
     style: TextStyle = TextStyle(),
     width: Float = 10f,
-    paddingBottomOffset: Float = 20f,
+    paddingBottomOffset: Float = 10f,
     modifier: Modifier = Modifier
 ) {
     var layout by remember { mutableStateOf<TextLayoutResult?>(null) }
