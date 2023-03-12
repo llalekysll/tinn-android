@@ -25,7 +25,7 @@ fun Pager() {
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(horizontal = 28.dp, vertical = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(pagers) {
@@ -37,7 +37,7 @@ fun Pager() {
                     fontWeight = weight,
                     fontSize = 16.sp,
                 ),
-                width = if (selectedPage == it) 10f else 0f,
+                width = if (selectedPage == it) 5f else 0f,
                 lineColor = Color.Black,
                 modifier = Modifier.clickable { selectedPage = it })
         }
