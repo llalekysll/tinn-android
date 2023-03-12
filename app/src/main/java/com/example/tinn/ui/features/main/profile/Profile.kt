@@ -2,6 +2,7 @@ package com.example.tinn.ui.features.main.profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -11,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -33,7 +35,7 @@ fun ProfileScreen(navController: NavController) {
     user?.let {
         Box(contentAlignment = Alignment.TopEnd) {
             val url = it.userProfiles.background
-                ?: "https://s0.rbk.ru/v6_top_pics/media/img/9/16/756619467602169.jpg"
+                ?: "https://tinn.io/images/profile_bg.jpg?139dbff8e258a4fb08c356ede6ef77d0"
 
             GlideImage(
                 modifier = Modifier
