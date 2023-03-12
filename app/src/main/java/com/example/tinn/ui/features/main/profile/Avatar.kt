@@ -27,7 +27,7 @@ import com.skydoves.landscapist.glide.GlideImage
 typealias status = StatusRequestFactory.StatusType
 
 @Composable
-fun Avatar(avatar: String?) {
+fun Avatar(avatar: String) {
     val viewModel: UserViewModel = viewModel()
 
     var imageUri by remember { mutableStateOf<Uri?>(null) }
@@ -48,24 +48,11 @@ fun Avatar(avatar: String?) {
     }
     if (statusRequest?.status == status.LOADING) CircularProgressIndicator()
 
-    if (avatar != null) {
         GlideImage(
             imageModel = avatar,
             Modifier
-                .clip(CircleShape)
                 .padding(16.dp)
                 .size(80.dp)
+                .clip(CircleShape),
         )
-    } else {
-        Image(
-            painter = painterResource(id = R.drawable.ic_avatar),
-            contentDescription = "avatar",
-            modifier = Modifier
-                .padding(16.dp)
-                .size(80.dp)
-                .clickable {
-                    launcher.launch("image/*")
-                }
-        )
-    }
 }
