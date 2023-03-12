@@ -30,7 +30,7 @@ fun VerificationEmailScreen(navController: NavController) {
     })
 
     if (emailIsVerificated == true || true) {
-        navController.navigate(Screens.InputInfoUser.route) {
+        navController.navigate(Screens.Main.route) {
             popUpTo(navController.graph.startDestinationId) {
                 saveState = true
             }
