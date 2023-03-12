@@ -16,4 +16,9 @@ fun Calendar.parseDateToShortString(): String? {
     return format.format(this.time)
 }
 
+fun Calendar.parseDateToNumberString(): String? {
+    val format = SimpleDateFormat("dd.MM.yyyy")
+    return format.format(this.time)
+}
+
 fun Calendar.getDayOfWeek() = this.get(Calendar.DAY_OF_WEEK)
