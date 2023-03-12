@@ -16,3 +16,20 @@ fun TextFieldEmail(email: String, onValueChange: (newValue: String) -> Unit) {
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
     )
 }
+
+@Composable
+fun TextFieldEmailWithButtonChange(
+    email: String,
+    onSave: () -> Unit,
+    onValueChange: (newValue: String) -> Unit
+) {
+    TextFieldsWithButtonChange(
+        value = email,
+        onValueChange = { text -> onValueChange(text) },
+        labelText = "Введите email",
+        onSave = { onSave() },
+        isError = email.emailIfValid().not(),
+        errorText = "Email не валиден",
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+    )
+}
