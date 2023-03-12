@@ -120,7 +120,7 @@ fun UserInputInfoScreen(navController: NavController) {
 
                 TextFieldDate(
                     label = "Дата рождения",
-                    modifier = Modifier.width(175.dp),
+                    modifier = Modifier.width(175.dp).padding(top = 6.dp),
                     currentDate = dateOfBirth
                 ) {
                     calendarAlertIsVisible = true
