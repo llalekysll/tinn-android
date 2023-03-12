@@ -1,12 +1,12 @@
 package com.example.tinn.ui.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -17,17 +17,24 @@ import com.example.tinn.R
 import com.example.tinn.ui.theme.Alpha
 import com.example.tinn.ui.theme.Blue
 import com.example.tinn.ui.theme.DarkGray
+import com.example.tinn.ui.theme.Gray
+import com.example.tinn.utils.parseDateToNumberString
+import com.example.tinn.utils.parseDateToShortString
+import java.util.Calendar
 
 @Composable
 fun TextFieldsWithLabelError(
     value: String,
-    onValueChange: (newValue: String) -> Unit,
+    onValueChange: (newValue: String) -> Unit = {},
     visualTransformation: VisualTransformation = VisualTransformation.None,
     rightIcon: @Composable () -> Unit = {},
     errorText: String = "",
     labelText: String = "",
+    enabled: Boolean = true,
     isError: Boolean = false,
-    modifier: Modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp),
+    modifier: Modifier = Modifier
+        .fillMaxWidth()
+        .padding(horizontal = 32.dp),
     keyboardOptions: KeyboardOptions = KeyboardOptions()
 ) {
     Column {
@@ -35,6 +42,7 @@ fun TextFieldsWithLabelError(
             value = value,
             onValueChange = { text -> onValueChange(text) },
             modifier = modifier,
+            enabled = enabled,
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Alpha
             ),
@@ -94,4 +102,42 @@ fun TextFieldPassword(
         isError = isError,
         visualTransformation = if (isShowPassword) VisualTransformation.None else PasswordVisualTransformation(),
     )
+}
+
+@Composable
+fun TextFieldDate(
+    label: String,
+    modifier: Modifier = Modifier,
+    currentDate: Calendar?,
+    colorLabel: Color = Gray,
+    colorIcon: Color = Color.Black,
+    colorText: Color = Color.Black,
+    onClick: () -> Unit
+) {
+    Column(modifier = modifier) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Column(
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(text = label, color = colorLabel)
+
+                currentDate?.let {
+                    Text(text = currentDate.parseDateToNumberString()!!, color = colorText)
+                }
+            }
+
+            IconButton(onClick = { onClick() }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_calendar),
+                    contentDescription = "Выбрать дату",
+                    tint = colorLabel
+                )
+            }
+        }
+
+        HorizontalSpacer()
+    }
 }
