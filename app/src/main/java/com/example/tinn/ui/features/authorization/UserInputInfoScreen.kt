@@ -111,13 +111,13 @@ fun UserInputInfoScreen(navController: NavController) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 TextFieldPhoneNumber(
                     value = phone,
-                    modifier = Modifier.width(175.dp),
-                    onValueChange = { if (phone.length < 10 && it.isDigitsOnly()) phone = it },
+                    modifier = Modifier.width(200.dp),
+                    onValueChange = { phone = it },
                 )
 
                 TextFieldDate(
                     label = "Дата рождения",
-                    modifier = Modifier.width(175.dp).padding(top = 6.dp),
+                    modifier = Modifier.width(150.dp).padding(top = 6.dp),
                     currentDate = dateOfBirth
                 ) {
                     calendarAlertIsVisible = true
@@ -153,7 +153,7 @@ fun UserInputInfoScreen(navController: NavController) {
                         secondName,
                         sex!!.id,
                         phone,
-                        dateOfBirth.toString(),
+                        dateOfBirth!!,
                     )
                 },
                 modifier = Modifier.padding(top = 16.dp),
@@ -162,7 +162,7 @@ fun UserInputInfoScreen(navController: NavController) {
                         && secondName.isNotEmpty()
                         && sex != null
                         && phone.length == 10
-                        && dateOfBirth.toString().length == 8,
+                        && dateOfBirth != null,
                 text = "Регистрация"
             )
         }
