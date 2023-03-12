@@ -3,13 +3,12 @@ package com.example.tinn.ui.features.authorization
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
@@ -18,15 +17,16 @@ import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.tinn.R
 import com.example.tinn.data.modelForJSON.Gender
-import com.example.tinn.ui.components.AppButton
-import com.example.tinn.ui.components.Spinner
-import com.example.tinn.ui.components.TextFieldsWithLabelError
+import com.example.tinn.ui.components.*
+import com.example.tinn.ui.components.calendarView.CalendarAlertDialog
 import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.ui.theme.Blue
 import com.example.tinn.ui.theme.Gray
 import com.example.tinn.utils.*
 import com.example.tinn.viewModel.UserViewModel
+import java.util.*
 
 typealias status = StatusRequestFactory.StatusType
 
@@ -62,9 +62,17 @@ fun UserInputInfoScreen(navController: NavController) {
             var login by remember { mutableStateOf("") }
             var firstName by remember { mutableStateOf("") }
             var secondName by remember { mutableStateOf("") }
-            var sex by remember { mutableStateOf<Gender?>( null) }
+            var sex by remember { mutableStateOf<Gender?>(null) }
             var phone by remember { mutableStateOf("") }
-            var dateOfBirth by remember { mutableStateOf("") }
+
+            var dateOfBirth by remember { mutableStateOf<Calendar?>(null) }
+            var calendarAlertIsVisible by remember { mutableStateOf(false) }
+
+            CalendarAlertDialog(
+                isVisible = calendarAlertIsVisible,
+                hideAlertDialog = { calendarAlertIsVisible = false },
+                changeSelectedDate = { dateOfBirth = it }
+            )
 
             Text(
                 text = "Продолжите регистрацию",
@@ -103,27 +111,21 @@ fun UserInputInfoScreen(navController: NavController) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 TextFieldsWithLabelError(
                     value = phone,
-                    modifier = Modifier.width(200.dp),
+                    modifier = Modifier.width(175.dp),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                     onValueChange = { if (phone.length < 10 && it.isDigitsOnly()) phone = it },
                     visualTransformation = DigitVisualTransformation("+7-000-000-00-00", '0'),
                     labelText = "Телефон",
                 )
 
-                TextFieldsWithLabelError(
-                    value = dateOfBirth,
-                    onValueChange = {
-                        if (dateOfBirth.length < 8 && it.isDigitsOnly()) {
-                            dateOfBirth = it
-                        }
-                    },
-                    modifier = Modifier.width(174.dp),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-                    visualTransformation = DigitVisualTransformation("00/00/0000", '0'),
-                    labelText = "ДД/ММ/ГГГГ",
-                )
+                TextFieldDate(
+                    label = "Дата рождения",
+                    modifier = Modifier.width(175.dp),
+                    currentDate = dateOfBirth
+                ) {
+                    calendarAlertIsVisible = true
+                }
             }
-
             val annotatedString = buildAnnotatedString {
                 append("Нажимая на кнопку 'Регистрация' вы даете согласие на ")
                 pushStringAnnotation("обработку персональных данных", "https://tinn.io/main")
@@ -154,7 +156,7 @@ fun UserInputInfoScreen(navController: NavController) {
                         secondName,
                         sex!!.id,
                         phone,
-                        dateOfBirth,
+                        dateOfBirth.toString(),
                     )
                 },
                 modifier = Modifier.padding(top = 16.dp),
@@ -163,7 +165,7 @@ fun UserInputInfoScreen(navController: NavController) {
                         && secondName.isNotEmpty()
                         && sex != null
                         && phone.length == 10
-                        && dateOfBirth.length == 8,
+                        && dateOfBirth.toString().length == 8,
                 text = "Регистрация"
             )
         }
