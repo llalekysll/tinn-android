@@ -18,7 +18,7 @@ import androidx.navigation.NavController
 import com.example.tinn.ui.components.AppButton
 import com.example.tinn.ui.components.TextFieldEmail
 import com.example.tinn.ui.components.TextFieldPassword
-import com.example.tinn.ui.components.TextFieldsWithLabelError
+import com.example.tinn.ui.components.textFields.TextFieldsWithLabelError
 import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.utils.AUTHORIZATION
 import com.example.tinn.utils.TOKEN

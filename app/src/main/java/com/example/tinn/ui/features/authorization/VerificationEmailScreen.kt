@@ -16,7 +16,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.tinn.R
 import com.example.tinn.ui.components.AppButton
-import com.example.tinn.ui.components.TextFieldsWithLabelError
+import com.example.tinn.ui.components.textFields.TextFieldsWithLabelError
 import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.viewModel.AuthorizationViewModel
 

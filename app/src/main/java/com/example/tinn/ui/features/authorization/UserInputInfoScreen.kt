@@ -8,7 +8,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
@@ -17,10 +16,11 @@ import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.tinn.R
 import com.example.tinn.data.modelForJSON.Gender
 import com.example.tinn.ui.components.*
 import com.example.tinn.ui.components.calendarView.CalendarAlertDialog
+import com.example.tinn.ui.components.textFields.TextFieldDate
+import com.example.tinn.ui.components.textFields.TextFieldsWithLabelError
 import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.ui.theme.Blue
 import com.example.tinn.ui.theme.Gray
