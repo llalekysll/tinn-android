@@ -9,14 +9,17 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tinn.ui.components.TextWithUnderLine
 
 @Composable
 fun Pager() {
-    val pagers = listOf("My room", "Плейлисты", "Подписки", "О канале")
+    val pagers = listOf("MY ROOM", "ПЛЕЙЛИСТЫ", "ПОДПИСКИ", "О КАНАЛЕ")
     var selectedPage by remember { mutableStateOf(pagers[0]) }
 
     LazyRow(
@@ -27,14 +30,15 @@ fun Pager() {
     ) {
         items(pagers) {
             val weight = if (selectedPage == it) FontWeight.Bold else FontWeight.Normal
-            val textDecoration =
-                if (selectedPage == it) TextDecoration.Underline else TextDecoration.None
 
-            Text(
+            TextWithUnderLine(
                 text = it,
-                fontWeight = weight,
-                fontSize = 20.sp,
-                textDecoration = textDecoration,
+                style = TextStyle(
+                    fontWeight = weight,
+                    fontSize = 16.sp,
+                ),
+                width = if (selectedPage == it) 10f else 0f,
+                lineColor = Color.Black,
                 modifier = Modifier.clickable { selectedPage = it })
         }
     }
