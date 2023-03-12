@@ -37,7 +37,7 @@ fun Pager() {
                     fontWeight = weight,
                     fontSize = 16.sp,
                 ),
-                width = if (selectedPage == it) 5f else 0f,
+                lineIsVisible = selectedPage == it,
                 lineColor = Color.Black,
                 modifier = Modifier.clickable { selectedPage = it })
         }

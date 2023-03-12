@@ -26,7 +26,8 @@ fun TextWithUnderLine(
     textColor: Color = Color.Black,
     lineColor: Color = Blue,
     style: TextStyle = TextStyle(),
-    width: Float = 10f,
+    width: Float = 5f,
+    lineIsVisible: Boolean = true,
     paddingBottomOffset: Float = 10f,
     modifier: Modifier = Modifier
 ) {
@@ -41,7 +42,7 @@ fun TextWithUnderLine(
         },
         modifier = modifier
             .drawBehind {
-                if (width > 0f) {
+                if (lineIsVisible) {
                     layout?.let {
                         drawPath(
                             path = Path().apply {
