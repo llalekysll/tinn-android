@@ -97,6 +97,25 @@ class UserViewModel : ViewModel() {
 
     }
 
+    fun putUserInfo(
+        values: HashMap<String, Any>
+    ) {
+        db.putUser(values).enqueue(object : Callback<ResponceDataUserModel> {
+            override fun onResponse(
+                call: Call<ResponceDataUserModel>,
+                response: Response<ResponceDataUserModel>
+            ) {
+                _requestStatus.value =
+                    StatusRequestFactory.getSuccess(response.body(), "putUser")
+            }
+
+            override fun onFailure(call: Call<ResponceDataUserModel>, t: Throwable) {
+                _requestStatus.value = StatusRequestFactory.getNone()
+                ErrorObserver.showErrorMessage(t.message.toString())
+            }
+        })
+    }
+
     fun getUserInfo() {
         db.getUser().enqueue(object : Callback<ResponceModel<ResponceDataUserModel>> {
             override fun onResponse(

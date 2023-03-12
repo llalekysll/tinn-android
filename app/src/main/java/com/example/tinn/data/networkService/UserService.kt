@@ -21,6 +21,9 @@ interface UserService {
     @PUT("profile/user")
     fun putUser(@Body profileModel: ProfileModel, ): Call<ResponceDataUserModel>
 
+    @PUT("profile/user")
+    fun putUser(@Body values: HashMap<String, Any>): Call<ResponceDataUserModel>
+
     @GET("profile/genders")
     fun getGenders(): Call<ResponceModel<ResponceDataGendersModel>>
 
