@@ -20,6 +20,7 @@ import com.example.tinn.data.modelForJSON.Gender
 import com.example.tinn.ui.components.*
 import com.example.tinn.ui.components.calendarView.CalendarAlertDialog
 import com.example.tinn.ui.components.textFields.TextFieldDate
+import com.example.tinn.ui.components.textFields.TextFieldPhoneNumber
 import com.example.tinn.ui.components.textFields.TextFieldsWithLabelError
 import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.ui.theme.Blue
@@ -109,13 +110,10 @@ fun UserInputInfoScreen(navController: NavController) {
             )
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                TextFieldsWithLabelError(
+                TextFieldPhoneNumber(
                     value = phone,
                     modifier = Modifier.width(175.dp),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                     onValueChange = { if (phone.length < 10 && it.isDigitsOnly()) phone = it },
-                    visualTransformation = DigitVisualTransformation("+7-000-000-00-00", '0'),
-                    labelText = "Телефон",
                 )
 
                 TextFieldDate(
