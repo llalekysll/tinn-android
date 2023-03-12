@@ -1,6 +1,5 @@
 package com.example.tinn.ui.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.DropdownMenu
@@ -19,7 +18,6 @@ import androidx.compose.ui.unit.sp
 import com.example.tinn.R
 import com.example.tinn.data.modelForJSON.Gender
 import com.example.tinn.ui.theme.Alpha
-import com.example.tinn.ui.theme.DarkGray
 
 @Composable
 fun Spinner(
