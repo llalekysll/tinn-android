@@ -14,14 +14,20 @@ import com.example.tinn.utils.DigitVisualTransformation
 @Composable
 fun TextFieldPhoneNumber(
     value: String,
-    modifier: Modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+    modifier: Modifier = Modifier
+        .fillMaxWidth()
+        .padding(horizontal = 8.dp),
     onValueChange: (newValue: String) -> Unit
 ) {
     TextFieldsWithLabelError(
         value = value,
         modifier = Modifier.width(175.dp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-        onValueChange = { if (value.length < 10 && it.isDigitsOnly()) onValueChange(it) },
+        onValueChange = {
+            if (value.length < 10 && it.isDigitsOnly() || value.length > it.length) {
+                onValueChange(it)
+            }
+        },
         visualTransformation = DigitVisualTransformation("+7-000-000-00-00", '0'),
         labelText = "Телефон",
     )
@@ -36,8 +42,12 @@ fun TextFieldPhoneNumberWithButtonChange(
     TextFieldsWithButtonChange(
         value = value,
         onSave = { onSave() },
-        keyboardOptions = KeyboardOptions (keyboardType = KeyboardType.Phone),
-        onValueChange = { if (value.length < 10 && it.isDigitsOnly()) onValueChange(it) },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+        onValueChange = {
+            if (value.length < 10 && it.isDigitsOnly() || value.length > it.length) {
+                onValueChange(it)
+            }
+        },
         visualTransformation = DigitVisualTransformation("+7-000-000-00-00", '0'),
         labelText = "Телефон",
     )
