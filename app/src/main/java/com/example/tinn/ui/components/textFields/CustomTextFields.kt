@@ -62,8 +62,7 @@ fun TextFieldsWithButtonChange(
     labelText: String = "",
     isError: Boolean = false,
     modifier: Modifier = Modifier
-        .fillMaxWidth()
-        .padding(horizontal = 32.dp),
+        .fillMaxWidth(),
     keyboardOptions: KeyboardOptions = KeyboardOptions()
 ) {
     var isEnabled by remember { mutableStateOf(false) }

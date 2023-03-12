@@ -35,7 +35,6 @@ fun TextFieldPhoneNumberWithButtonChange(
 ) {
     TextFieldsWithButtonChange(
         value = value,
-        modifier = Modifier.width(175.dp),
         onSave = { onSave() },
         keyboardOptions = KeyboardOptions (keyboardType = KeyboardType.Phone),
         onValueChange = { if (value.length < 10 && it.isDigitsOnly()) onValueChange(it) },

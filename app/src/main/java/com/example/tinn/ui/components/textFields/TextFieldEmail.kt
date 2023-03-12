@@ -1,7 +1,9 @@
 package com.example.tinn.ui.components.textFields
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import com.example.tinn.utils.emailIfValid
 
