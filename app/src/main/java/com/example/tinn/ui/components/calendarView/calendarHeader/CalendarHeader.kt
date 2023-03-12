@@ -37,7 +37,9 @@ fun CalendarHeader(
             text = currentDate.value.getYear().toString(),
             style = MaterialTheme.typography.h5,
             color = colorYear,
-            modifier = Modifier.padding(start = 16.dp).clickable { changeMode("year") }
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .clickable { changeMode("year") }
         )
 
         val colorMonth = if (currentMode == "month")
@@ -46,9 +48,13 @@ fun CalendarHeader(
             text = currentDate.value.parseDateToShortString()!!,
             style = MaterialTheme.typography.h4,
             color = colorMonth,
-            modifier = Modifier.padding(start = 16.dp, bottom = 16.dp).clickable { changeMode("month") }
+            modifier = Modifier
+                .padding(start = 16.dp, bottom = 16.dp)
+                .clickable { changeMode("month") }
         )
 
-        CalendarHeaderMonth(currentDate = currentDate, theme = theme)
+        if (currentMode == "month") {
+            CalendarHeaderMonth(currentDate = currentDate, theme = theme)
+        }
     }
 }
