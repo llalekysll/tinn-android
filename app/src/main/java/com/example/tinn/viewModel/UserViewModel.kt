@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tinn.data.modelForJSON.*
+import com.example.tinn.data.networkService.AuthorizationService
 import com.example.tinn.data.networkService.RetrofitClient
 import com.example.tinn.data.networkService.UserService
 import com.example.tinn.utils.StatusRequestFactory
@@ -15,6 +16,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 typealias status = StatusRequestFactory.StatusRequestModel<Any>
 
@@ -29,6 +32,8 @@ class UserViewModel : ViewModel() {
         get() = _userInfo
 
     private val db = RetrofitClient.getRetrofitService().create(UserService::class.java)
+    private val auth =
+        RetrofitClient.getRetrofitAuthService().create(AuthorizationService::class.java)
 
     fun getGender() {
         db.getGenders().enqueue(object : Callback<ResponceModel<ResponceDataGendersModel>> {
@@ -60,19 +65,17 @@ class UserViewModel : ViewModel() {
         secondName: String,
         sex: Int,
         phone: String,
-        dateOfBirth: String,
+        dateOfBirth: Calendar,
     ) {
         _requestStatus.value = StatusRequestFactory.getLoading()
-        val date = SimpleDateFormat("ddMMyyyy").parse(dateOfBirth)
 
-        if (date != null) {
             val model = ProfileModel(
                 login = login,
                 firstName = firstName,
                 secondName = secondName,
                 genderId = sex,
                 phone = phone,
-                dataOfBirth = date
+                dataOfBirth = dateOfBirth.time
             )
 
             db.putUser(model).enqueue(object : Callback<ResponceDataUserModel> {
@@ -89,12 +92,6 @@ class UserViewModel : ViewModel() {
                     ErrorObserver.showErrorMessage(t.message.toString())
                 }
             })
-
-        } else {
-            _requestStatus.value = StatusRequestFactory.getNone()
-            ErrorObserver.showErrorMessage("Дата рождения не валидна")
-        }
-
     }
 
     fun putUserInfo(
