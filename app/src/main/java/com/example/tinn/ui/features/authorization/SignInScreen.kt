@@ -18,8 +18,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.tinn.ui.components.AppButton
 import com.example.tinn.ui.components.CheckBoxWithLabel
-import com.example.tinn.ui.components.TextFieldEmail
-import com.example.tinn.ui.components.TextFieldPassword
+import com.example.tinn.ui.components.textFields.TextFieldEmail
+import com.example.tinn.ui.components.textFields.TextFieldPassword
 import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.utils.*
 import com.example.tinn.viewModel.AuthorizationViewModel
