@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tinn.ui.components.HorizontalSpacer
+import com.example.tinn.ui.components.TextWithUnderLine
 import com.example.tinn.ui.theme.Blue
 import com.example.tinn.viewModel.UserViewModel
 
@@ -65,16 +66,14 @@ fun ItemCategoryPages(
     choosePage: () -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
+        TextWithUnderLine(
             text = page.label,
-            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+            style = TextStyle(
+                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+            ),
+            lineIsVisible = isSelected,
             modifier = Modifier.clickable { choosePage() },
-            style = TextStyle()
         )
-
-        if (isSelected) {
-            HorizontalSpacer(colorSpacer = Blue, modifier = Modifier.width(60.dp))
-        }
     }
 }
 
