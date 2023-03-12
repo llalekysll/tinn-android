@@ -27,7 +27,8 @@ fun TextWithUnderLine(
     lineColor: Color = Blue,
     style: TextStyle = TextStyle(),
     width: Float = 10f,
-    paddingBottomOffset: Float = 50f,
+    paddingBottomOffset: Float = 20f,
+    modifier: Modifier = Modifier
 ) {
     var layout by remember { mutableStateOf<TextLayoutResult?>(null) }
 
@@ -38,21 +39,24 @@ fun TextWithUnderLine(
         onTextLayout = {
             layout = it
         },
-        modifier = Modifier
+        modifier = modifier
             .drawBehind {
-
-                layout?.let {
-
-                    drawPath(
-                        path = Path().apply {
-                            moveTo(it.getLineLeft(0), it.getLineBottom(0) + paddingBottomOffset)
-                            lineTo(it.getLineRight(0), it.getLineBottom(0) + paddingBottomOffset)
-                        },
-                        lineColor,
-                        style = Stroke(width = width)
-                    )
+                if (width > 0f) {
+                    layout?.let {
+                        drawPath(
+                            path = Path().apply {
+                                moveTo(it.getLineLeft(0), it.getLineBottom(0) + paddingBottomOffset)
+                                lineTo(
+                                    it.getLineRight(0),
+                                    it.getLineBottom(0) + paddingBottomOffset
+                                )
+                            },
+                            lineColor,
+                            style = Stroke(width = width)
+                        )
+                    }
                 }
             }
-            .padding(vertical = (paddingBottomOffset + 10f).dp)
+            .padding(bottom = (paddingBottomOffset + 10f).dp)
     )
 }
