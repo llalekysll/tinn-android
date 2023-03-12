@@ -7,7 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.style.TextAlign
 import com.example.tinn.ui.components.calendarView.CalendarItem
-import com.example.tinn.ui.components.calendarView.CalendarTheme
+import com.example.tinn.ui.theme.CalendarTheme
 import com.example.tinn.utils.getDate
 import com.example.tinn.utils.getDayOfWeek
 import com.example.tinn.utils.getMonth

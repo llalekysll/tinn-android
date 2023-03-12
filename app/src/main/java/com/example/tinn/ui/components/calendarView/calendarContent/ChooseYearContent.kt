@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.tinn.ui.components.calendarView.CalendarItemYearTheme
+import com.example.tinn.ui.theme.CalendarItemYearTheme
 
 private fun getYears(topYear: Int): List<Int> {
     val tempYears = mutableListOf<Int>()

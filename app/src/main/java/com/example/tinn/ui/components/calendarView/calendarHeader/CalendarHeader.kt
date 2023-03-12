@@ -7,13 +7,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.tinn.ui.components.calendarView.CalendarHeaderMonth
-import com.example.tinn.ui.components.calendarView.CalendarHeaderTheme
+import com.example.tinn.ui.theme.CalendarHeaderTheme
 import com.example.tinn.utils.getYear
 import com.example.tinn.utils.parseDateToShortString
 import java.util.*
