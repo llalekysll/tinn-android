@@ -3,6 +3,7 @@ package com.example.tinn.ui.components.calendarView
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -12,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tinn.ui.theme.Alpha
 import com.example.tinn.ui.theme.Blue
+import com.example.tinn.ui.theme.DarkGray
 import com.example.tinn.ui.theme.LightBlue
 
 data class CalendarAlertDialogTheme (
@@ -23,6 +25,7 @@ data class CalendarAlertDialogTheme (
 data class CalendarTheme(
     val calendarItemTheme: CalendarItemTheme = CalendarItemTheme(),
     val calendarHeaderTheme: CalendarHeaderTheme = CalendarHeaderTheme(),
+    val calendarItemYearTheme: CalendarItemYearTheme = CalendarItemYearTheme(),
     val backgroundColor: Color = Color(0, 0, 0, 0),
 )
 
@@ -46,4 +49,11 @@ data class CalendarItemTheme(
     val selectedDayBackgroundColor: Color = Color(0xFF78AEAE),
     val dayValueTextColor: Color = Color.Black,
     val selectedDayValueTextColor: Color = Color.White,
+)
+
+data class CalendarItemYearTheme(
+    val selectedColor: Color = Blue,
+    val unSelectedColor: Color = DarkGray,
+    val selectedSize: TextUnit = 32.sp,
+    val unSelectedSize: TextUnit = 24.sp,
 )
