@@ -11,14 +11,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tinn.ui.theme.Alpha
-import com.example.tinn.ui.theme.Blue
-import com.example.tinn.ui.theme.DarkGray
-import com.example.tinn.ui.theme.LightBlue
+import com.example.tinn.ui.theme.*
 
 data class CalendarAlertDialogTheme (
     val backgroundColor: Color = Color(0, 0, 0, 0),
-    val colorButton: Color = Color(0xFF78AEAE),
+    val colorButton: Color = Blue,
+    val colorButtonCansel: Color = Red,
     val width: Dp = 100.dp,
     val calendarTheme: CalendarTheme = CalendarTheme(),
 )
@@ -46,7 +44,7 @@ data class CalendarItemTheme(
     val dayShape: RoundedCornerShape = CircleShape,
     val dayBackgroundColor: Color = Color.White,
     val elevationDay: Dp = 5.dp,
-    val selectedDayBackgroundColor: Color = Color(0xFF78AEAE),
+    val selectedDayBackgroundColor: Color = Blue,
     val dayValueTextColor: Color = Color.Black,
     val selectedDayValueTextColor: Color = Color.White,
 )

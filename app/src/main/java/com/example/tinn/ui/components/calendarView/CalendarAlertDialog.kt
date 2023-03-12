@@ -59,6 +59,9 @@ fun CalendarAlertDialog(
                             modifier = Modifier
                                 .padding(horizontal = 8.dp)
                                 .width(100.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = calendarAlertDialogTheme.colorButtonCansel
+                            ),
                             onClick = {
                                 hideAlertDialog()
                             }) {
