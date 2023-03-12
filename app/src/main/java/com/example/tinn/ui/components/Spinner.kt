@@ -73,11 +73,6 @@ fun Spinner(
             }
         }
 
-        Spacer(
-            modifier = Modifier
-                .height(2.dp)
-                .fillMaxWidth()
-                .background(borderColor)
-        )
+        HorizontalSpacer(colorSpacer = borderColor)
     }
 }
