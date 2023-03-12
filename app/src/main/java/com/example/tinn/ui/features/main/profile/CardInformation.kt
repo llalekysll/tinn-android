@@ -37,11 +37,11 @@ fun CardInformation(navController: NavController, user: ResponceDataUserModel) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 val avatar = user.userProfiles.avatar
-                Avatar(avatar)
+                Avatar(avatar ?: "https://tinn.io/images/avatar2.jpg")
 
                 Column {
                     Text(
-                        text = "${user.userProfiles.secondName} ${user.userProfiles.firstName}",
+                        text = "${user.userProfiles.login}",
                         style = MaterialTheme.typography.h5
                     )
 
