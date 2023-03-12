@@ -2,7 +2,6 @@ package com.example.tinn.ui.features.authorization
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -10,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
@@ -19,6 +17,7 @@ import androidx.navigation.NavController
 import com.example.tinn.data.modelForJSON.Gender
 import com.example.tinn.ui.components.*
 import com.example.tinn.ui.components.calendarView.CalendarAlertDialog
+import com.example.tinn.ui.components.spinner.GenderSpinner
 import com.example.tinn.ui.components.textFields.TextFieldDate
 import com.example.tinn.ui.components.textFields.TextFieldPhoneNumber
 import com.example.tinn.ui.components.textFields.TextFieldsWithLabelError
@@ -102,7 +101,7 @@ fun UserInputInfoScreen(navController: NavController) {
                 labelText = "Фамилия",
             )
 
-            Spinner(
+            GenderSpinner(
                 items = state!!.body as List<Gender>,
                 hint = sex?.title ?: "Выберите пол",
                 borderColor = Gray,
