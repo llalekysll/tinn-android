@@ -17,7 +17,8 @@ import com.example.tinn.ui.theme.Red
 @Composable
 fun Toolbar(
     exit: () -> Unit,
-    openProfile: () -> Unit
+    openProfile: () -> Unit,
+    openSettings: () -> Unit
 ) {
     TopAppBar(elevation = 20.dp, backgroundColor = Color.White) {
         var isExpand by remember { mutableStateOf(false) }
@@ -51,6 +52,7 @@ fun Toolbar(
                     DropdownMenuItem(onClick = {
                         isExpand = false
                         when (it) {
+                            "Настройки" -> openSettings()
                             "Мой канал" -> openProfile()
                             else -> exit()
                         }

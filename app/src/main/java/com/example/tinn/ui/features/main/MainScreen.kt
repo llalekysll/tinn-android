@@ -32,7 +32,7 @@ fun MainScreen(mainNavController: NavController) {
                     restoreState = true
                 }
             },
-
+            openSettings = {navController.navigate(MainScreens.Settings.route)},
             openProfile = {navController.navigate(MainScreens.Profile.route)}
 
         ) },

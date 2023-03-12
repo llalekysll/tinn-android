@@ -18,6 +18,7 @@ sealed class MainScreens(val route: String, val label: String, val idIcon: Int?)
     object Room : MainScreens("room", "My room", R.drawable.ic_room)
     object Marketplace : MainScreens("marketplace", "Marketplace", R.drawable.ic_phone)
     object Profile : MainScreens("profile", "", null)
+    object Settings : MainScreens("settings", "", null)
 }
 
 val mainScreensList = mutableListOf(
