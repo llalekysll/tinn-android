@@ -21,10 +21,10 @@ fun TextFieldPhoneNumber(
 ) {
     TextFieldsWithLabelError(
         value = value,
-        modifier = Modifier.width(175.dp),
+        modifier = modifier,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
         onValueChange = {
-            if (value.length < 10 && it.isDigitsOnly() || value.length > it.length) {
+            if ((value.length < 10 && it.isDigitsOnly()) || value.length >= it.length) {
                 onValueChange(it)
             }
         },
