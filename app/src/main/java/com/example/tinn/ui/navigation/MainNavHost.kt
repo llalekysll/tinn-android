@@ -2,17 +2,18 @@ package com.example.tinn.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import com.example.tinn.ui.features.main.profile.ProfileScreen
 import com.example.tinn.ui.features.main.settings.MainSettingsScreen
 
 @Composable
-fun MainNavHost(mainNavController: NavHostController, modifier: Modifier) {
+fun MainNavHost(
+    mainNavController: NavHostController,
+    modifier: Modifier,
+    changeTheme: () -> Unit
+) {
     NavHost(
         modifier = modifier,
         navController = mainNavController,
@@ -46,7 +47,7 @@ fun MainNavHost(mainNavController: NavHostController, modifier: Modifier) {
         }
 
         composable(MainScreens.Settings.route) {
-            MainSettingsScreen()
+            MainSettingsScreen(changeTheme)
         }
     }
 }

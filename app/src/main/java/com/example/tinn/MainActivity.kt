@@ -3,13 +3,13 @@ package com.example.tinn
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -28,7 +28,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TinnTheme(true) {
+            var themeIsDark by remember { mutableStateOf(false) }
+
+            TinnTheme(themeIsDark) {
                 val viewModel: AuthorizationViewModel = viewModel()
                 val userViewModel: UserViewModel = viewModel()
 
@@ -51,8 +53,7 @@ class MainActivity : ComponentActivity() {
                     startDestination = if (it || true) {
                         userViewModel.getUserInfo()
                         ""
-                    }
-                    else Screens.ConfirmEmail.route
+                    } else Screens.ConfirmEmail.route
                 }
 
                 val userInfo by userViewModel.userInfo.observeAsState(null)
@@ -76,11 +77,13 @@ class MainActivity : ComponentActivity() {
                                 navController = navController,
                                 startDestination = startDestination,
                                 modifier = Modifier.padding(padding)
-                            )
+                            ) { themeIsDark = themeIsDark.not() }
                         }
                     )
                 } else {
-                    CircularProgressIndicator()
+                    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        CircularProgressIndicator()
+                    }
                 }
             }
         }

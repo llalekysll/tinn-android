@@ -16,28 +16,34 @@ import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.utils.AUTHORIZATION
 
 @Composable
-fun MainScreen(mainNavController: NavController) {
+fun MainScreen(mainNavController: NavController, changeTheme: () -> Unit) {
     val navController = rememberNavController()
     val pref = LocalContext.current.getSharedPreferences(AUTHORIZATION, MODE_PRIVATE)
 
     Scaffold(
-        topBar = { Toolbar(
-            exit = {
-                pref.edit().clear().apply()
-                mainNavController.navigate(Screens.SignIn.route) {
-                    popUpTo(navController.graph.startDestinationId) {
-                        saveState = true
+        topBar = {
+            Toolbar(
+                exit = {
+                    pref.edit().clear().apply()
+                    mainNavController.navigate(Screens.SignIn.route) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
                     }
-                    launchSingleTop = true
-                    restoreState = true
-                }
-            },
-            openSettings = {navController.navigate(MainScreens.Settings.route)},
-            openProfile = {navController.navigate(MainScreens.Profile.route)}
+                },
+                openSettings = { navController.navigate(MainScreens.Settings.route) },
+                openProfile = { navController.navigate(MainScreens.Profile.route) }
 
-        ) },
+            )
+        },
         bottomBar = { MainBottomNavigation(navController = navController) }
     ) { paddingValues ->
-        MainNavHost(mainNavController = navController, modifier = Modifier.padding(paddingValues))
+        MainNavHost(
+            mainNavController = navController,
+            modifier = Modifier.padding(paddingValues),
+            changeTheme = changeTheme
+        )
     }
 }
