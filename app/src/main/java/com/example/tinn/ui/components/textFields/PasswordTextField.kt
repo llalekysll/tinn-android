@@ -8,7 +8,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import com.example.tinn.R
 import com.example.tinn.ui.theme.Blue
-import com.example.tinn.ui.theme.DarkGray
+import com.example.tinn.ui.theme.DarkGray1
 
 @Composable
 fun TextFieldPassword(
@@ -28,7 +28,7 @@ fun TextFieldPassword(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_eye),
                     contentDescription = "Показать пароль",
-                    tint = if (!isShowPassword) DarkGray else Blue
+                    tint = if (!isShowPassword) DarkGray1 else Blue
                 )
             }
         },

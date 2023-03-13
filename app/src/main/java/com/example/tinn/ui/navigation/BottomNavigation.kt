@@ -21,14 +21,14 @@ fun MainBottomNavigation(navController: NavController) {
     destination?.let {
         if (destination.route != MainScreens.Profile.route) {
             BottomNavigation(
-                backgroundColor = MaterialTheme.colors.onBackground,
+                backgroundColor = MaterialTheme.colors.surface,
                 elevation = 16.dp
             ) {
                 LazyRow() {
                     items(mainScreensList) { currentScreen ->
                         val isSelected =
                             destination.hierarchy.any { it.route == currentScreen.route }
-                        val color = if (isSelected) Blue else MaterialTheme.colors.surface
+                        val color = if (isSelected) Blue else MaterialTheme.colors.onSurface
 
                         BottomNavigationItem(
                             selected = isSelected,

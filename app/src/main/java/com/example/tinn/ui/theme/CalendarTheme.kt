@@ -49,7 +49,7 @@ data class CalendarItemTheme(
 
 data class CalendarItemYearTheme(
     val selectedColor: Color = Blue,
-    val unSelectedColor: Color = DarkGray,
+    val unSelectedColor: Color = DarkGray1,
     val selectedSize: TextUnit = 32.sp,
     val unSelectedSize: TextUnit = 24.sp,
 )

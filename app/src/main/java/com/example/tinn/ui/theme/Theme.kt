@@ -18,8 +18,9 @@ private val DarkColorPalette = darkColors(
     primaryVariant = LightBlue,
     error = Red,
     background = DarkGray3,
-    onBackground = DarkGray2,
-    surface = Color.White
+    onBackground = DarkGray1,
+    surface = DarkGray2,
+    onSurface = Gray
 )
 
 @Composable

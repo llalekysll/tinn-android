@@ -25,7 +25,7 @@ fun Toolbar(
     openProfile: () -> Unit,
     openSettings: () -> Unit
 ) {
-    TopAppBar(elevation = 20.dp, backgroundColor = MaterialTheme.colors.onBackground) {
+    TopAppBar(elevation = 20.dp, backgroundColor = MaterialTheme.colors.surface) {
         var isExpand by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.End) {
             Row(
@@ -53,7 +53,7 @@ fun Toolbar(
                 expanded = isExpand,
                 onDismissRequest = { isExpand = false },
                 offset = DpOffset((-100).dp, 0.dp),
-                modifier = Modifier.background(MaterialTheme.colors.onBackground)
+                modifier = Modifier.background(MaterialTheme.colors.surface)
             ) {
                 listOf("Мой канал", "Настройки", "Выход").forEach {
                     DropdownMenuItem(onClick = {
@@ -66,7 +66,7 @@ fun Toolbar(
                     }) {
                         Text(
                             text = it,
-                            color = if (it == "Выход") Red else MaterialTheme.colors.surface
+                            color = if (it == "Выход") Red else MaterialTheme.colors.onSurface
                         )
                     }
                 }

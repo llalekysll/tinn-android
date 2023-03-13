@@ -10,6 +10,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.tinn.ui.theme.Alpha
 import com.example.tinn.ui.theme.Blue
+import com.example.tinn.ui.theme.Gray
 
 @Composable
 fun TextFieldsWithLabelError(
@@ -33,7 +34,7 @@ fun TextFieldsWithLabelError(
             modifier = modifier,
             enabled = enabled,
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Alpha
+                backgroundColor = Alpha,
             ),
             trailingIcon = { rightIcon() },
             label = { Text(labelText) },
@@ -74,7 +75,9 @@ fun TextFieldsWithButtonChange(
             modifier = modifier,
             enabled = isEnabled,
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Alpha
+                backgroundColor = Alpha,
+                textColor = MaterialTheme.colors.onSurface,
+                disabledTextColor = Gray
             ),
             trailingIcon = {
                 Text(
