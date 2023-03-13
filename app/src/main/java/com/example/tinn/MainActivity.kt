@@ -21,14 +21,17 @@ import com.example.tinn.ui.navigation.Screens
 import com.example.tinn.utils.*
 import com.example.tinn.viewModel.AuthorizationViewModel
 import com.example.tinn.viewModel.ErrorObserver
+import com.example.tinn.viewModel.UserViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TinnTheme {
+            TinnTheme(true) {
                 val viewModel: AuthorizationViewModel = viewModel()
+                val userViewModel: UserViewModel = viewModel()
+
                 val stateUI = rememberSystemUiController()
                 stateUI.setStatusBarColor(MaterialTheme.colors.background)
 
@@ -45,8 +48,20 @@ class MainActivity : ComponentActivity() {
 
                 val emailState by viewModel.emailIsVerificated.observeAsState(null)
                 emailState?.let {
-                    startDestination = if (it) Screens.Main.route
+                    startDestination = if (it || true) {
+                        userViewModel.getUserInfo()
+                        ""
+                    }
                     else Screens.ConfirmEmail.route
+                }
+
+                val userInfo by userViewModel.userInfo.observeAsState(null)
+                userInfo?.let {
+                    startDestination = if (it.userProfiles.login == null) {
+                        Screens.InputInfoUser.route
+                    } else {
+                        Screens.Main.route
+                    }
                 }
 
                 if (startDestination.isNotEmpty()) {
