@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -39,20 +40,24 @@ fun MainSettingsScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
-                elevation = 8.dp
+                shape = RoundedCornerShape(8.dp),
+                elevation= 8.dp
             ) {
                 Column(
                     Modifier
                         .fillMaxWidth()
-                        .padding(8.dp)
+                        .padding(16.dp)
                 ) {
-                    LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                         items(pagesSettingsList) {
                             ItemCategoryPages(it, selectedPage == it) { selectedPage = it }
                         }
                     }
 
-                    CommonSettingsView(viewModel, it)
+                    when (selectedPage) {
+                        PagesSettings.COMMON -> CommonSettingsView(viewModel, it)
+                        else -> {}
+                    }
                 }
             }
         }
