@@ -2,10 +2,7 @@ package com.example.tinn.ui.navigation
 
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -24,14 +21,14 @@ fun MainBottomNavigation(navController: NavController) {
     destination?.let {
         if (destination.route != MainScreens.Profile.route) {
             BottomNavigation(
-                backgroundColor = Color.White,
+                backgroundColor = MaterialTheme.colors.onBackground,
                 elevation = 16.dp
             ) {
                 LazyRow() {
                     items(mainScreensList) { currentScreen ->
                         val isSelected =
                             destination.hierarchy.any { it.route == currentScreen.route }
-                        val color = if (isSelected) Blue else Color.Black
+                        val color = if (isSelected) Blue else MaterialTheme.colors.surface
 
                         BottomNavigationItem(
                             selected = isSelected,
