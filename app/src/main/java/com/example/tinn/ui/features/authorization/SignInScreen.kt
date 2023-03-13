@@ -75,7 +75,7 @@ fun SignInScreen(navHostController: NavHostController) {
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
 
-            CheckBoxWithLabel(checked = isRememberUser, onCheckedChanged = { isRememberUser = it })
+            CheckBoxWithLabel(label = "Запомнить", checked = isRememberUser, onCheckedChanged = { isRememberUser = it })
         }
         AppButton(
             onClick = { viewModel.signIn(email, password) },
