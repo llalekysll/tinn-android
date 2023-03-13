@@ -2,6 +2,7 @@ package com.example.tinn.ui.components
 
 import android.widget.Toolbar
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -24,7 +25,7 @@ fun Toolbar(
     openProfile: () -> Unit,
     openSettings: () -> Unit
 ) {
-    TopAppBar(elevation = 20.dp, backgroundColor = Color.White) {
+    TopAppBar(elevation = 20.dp, backgroundColor = MaterialTheme.colors.onBackground) {
         var isExpand by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.End) {
             Row(
@@ -51,7 +52,8 @@ fun Toolbar(
             DropdownMenu(
                 expanded = isExpand,
                 onDismissRequest = { isExpand = false },
-                offset = DpOffset((-100).dp, 0.dp)
+                offset = DpOffset((-100).dp, 0.dp),
+                modifier = Modifier.background(MaterialTheme.colors.onBackground)
             ) {
                 listOf("Мой канал", "Настройки", "Выход").forEach {
                     DropdownMenuItem(onClick = {
@@ -64,7 +66,7 @@ fun Toolbar(
                     }) {
                         Text(
                             text = it,
-                            color = if (it == "Выход") Red else Color.Black
+                            color = if (it == "Выход") Red else MaterialTheme.colors.surface
                         )
                     }
                 }
