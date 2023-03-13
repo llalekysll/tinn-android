@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.tinn.data.networkService.ServiceInterceptor
+import com.example.tinn.data.networkService.ServiceInterceptor.token
 import com.example.tinn.ui.theme.TinnTheme
 import com.example.tinn.ui.navigation.AppNavHost
 import com.example.tinn.ui.navigation.Screens
@@ -38,32 +39,39 @@ class MainActivity : ComponentActivity() {
                 stateUI.setStatusBarColor(MaterialTheme.colors.background)
 
                 val pref = LocalContext.current.getSharedPreferences(AUTHORIZATION, MODE_PRIVATE)
+                var startDestination by remember { mutableStateOf("") }
 
-                val token = pref.getString(TOKEN, "")
-                var startDestination = if (!token.isNullOrEmpty()) {
-                    ServiceInterceptor.token = token
-                    viewModel.checkEmailIsVerificated()
-                    ""
-                } else {
-                    Screens.SignIn.route
-                }
+                var token by remember { mutableStateOf(pref.getString(TOKEN, "")) }
+                LaunchedEffect(key1 = token, block = {
+                    startDestination = if (!token.isNullOrEmpty()) {
+                        ServiceInterceptor.token = token as String
+                        viewModel.checkEmailIsVerificated()
+                        ""
+                    } else {
+                        Screens.SignIn.route
+                    }
+                })
 
                 val emailState by viewModel.emailIsVerificated.observeAsState(null)
-                emailState?.let {
-                    startDestination = if (it || true) {
-                        userViewModel.getUserInfo()
-                        ""
-                    } else Screens.ConfirmEmail.route
-                }
+                LaunchedEffect(key1 = emailState, block = {
+                    emailState?.let {
+                        startDestination = if (it || true) {
+                            userViewModel.getUserInfo()
+                            ""
+                        } else Screens.ConfirmEmail.route
+                    }
+                })
 
                 val userInfo by userViewModel.userInfo.observeAsState(null)
-                userInfo?.let {
-                    startDestination = if (it.userProfiles.login == null) {
-                        Screens.InputInfoUser.route
-                    } else {
-                        Screens.Main.route
+                LaunchedEffect(key1 = userInfo, block = {
+                    userInfo?.let {
+                        startDestination = if (it.userProfiles.login == null) {
+                            Screens.InputInfoUser.route
+                        } else {
+                            Screens.Main.route
+                        }
                     }
-                }
+                })
 
                 if (startDestination.isNotEmpty()) {
                     val navController = rememberNavController()
