@@ -102,8 +102,12 @@ class UserViewModel : ViewModel() {
                 call: Call<ResponceDataUserModel>,
                 response: Response<ResponceDataUserModel>
             ) {
-                _requestStatus.value =
-                    StatusRequestFactory.getSuccess(response.body(), "putUser")
+                if (response.isSuccessful) {
+                    _requestStatus.value =
+                        StatusRequestFactory.getSuccess(response.body(), "putUser")
+                } else {
+                    ErrorObserver.showErrorMessage("Произошла ошибка")
+                }
             }
 
             override fun onFailure(call: Call<ResponceDataUserModel>, t: Throwable) {
@@ -133,7 +137,10 @@ class UserViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ResponceModel<ResponceDataUserModel>>, t: Throwable) {
+            override fun onFailure(
+                call: Call<ResponceModel<ResponceDataUserModel>>,
+                t: Throwable
+            ) {
                 ErrorObserver.showErrorMessage(t.message.toString())
             }
         })
