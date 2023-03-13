@@ -1,6 +1,7 @@
 package com.example.tinn.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -22,7 +23,11 @@ fun TextWithCaption(
             horizontalArrangement = Arrangement.spacedBy(32.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = caption, modifier = Modifier.width(80.dp))
+            Text(
+                text = caption,
+                modifier = Modifier.width(80.dp),
+                color = MaterialTheme.colors.onSurface
+            )
             content()
         }
 

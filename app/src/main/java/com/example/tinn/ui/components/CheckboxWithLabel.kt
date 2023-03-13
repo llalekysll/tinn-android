@@ -29,6 +29,6 @@ fun CheckBoxWithLabel(
                 checkedColor = MaterialTheme.colors.primary
             )
         )
-        Text(text = label)
+        Text(text = label, color = MaterialTheme.colors.onSurface)
     }
 }
