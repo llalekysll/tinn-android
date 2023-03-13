@@ -54,7 +54,7 @@ fun MainSettingsScreen(changeTheme: () -> Unit) {
                     }
 
                     when (selectedPage) {
-                        PagesSettings.COMMON -> CommonSettingsView(viewModel, it)
+                        PagesSettings.COMMON -> CommonSettingsView(viewModel, it, changeTheme)
                         else -> {}
                     }
                 }
