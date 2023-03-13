@@ -23,8 +23,8 @@ import com.example.tinn.ui.theme.Blue
 @Composable
 fun TextWithUnderLine(
     text: String,
-    textColor: Color = Color.Black,
-    lineColor: Color = Blue,
+    textColor: Color = MaterialTheme.colors.onSurface,
+    lineColor: Color = MaterialTheme.colors.primary,
     style: TextStyle = TextStyle(),
     width: Float = 5f,
     lineIsVisible: Boolean = true,

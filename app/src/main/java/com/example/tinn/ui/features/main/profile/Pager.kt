@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -38,7 +39,7 @@ fun Pager() {
                     fontSize = 16.sp,
                 ),
                 lineIsVisible = selectedPage == it,
-                lineColor = Color.Black,
+                lineColor = MaterialTheme.colors.onSurface,
                 modifier = Modifier.clickable { selectedPage = it })
         }
     }

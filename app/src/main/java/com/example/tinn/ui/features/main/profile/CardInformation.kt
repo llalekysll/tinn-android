@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tinn.R
 import com.example.tinn.data.modelForJSON.ResponceDataUserModel
-import com.example.tinn.ui.theme.DarkGray
+import com.example.tinn.ui.theme.DarkGray1
 import com.example.tinn.ui.theme.Gray
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -25,6 +25,7 @@ fun CardInformation(navController: NavController, user: ResponceDataUserModel) {
     Card(
         elevation = 16.dp,
         shape = RoundedCornerShape(topEnd = 16.dp, topStart = 16.dp),
+        backgroundColor = MaterialTheme.colors.background,
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
@@ -42,13 +43,14 @@ fun CardInformation(navController: NavController, user: ResponceDataUserModel) {
                 Column {
                     Text(
                         text = "${user.userProfiles.login}",
-                        style = MaterialTheme.typography.h5
+                        style = MaterialTheme.typography.h5,
+                        color = MaterialTheme.colors.onSurface
                     )
 
                     Text(
                         text = "${user.profileInfo.videosCount} видео |" +
                                 " ${user.profileInfo.subscriptionsCount} подписчиков",
-                        color = DarkGray
+                        color = MaterialTheme.colors.onSurface
                     )
                 }
 
