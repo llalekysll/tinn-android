@@ -49,6 +49,6 @@ fun TextFieldPhoneNumberWithButtonChange(
             }
         },
         visualTransformation = DigitVisualTransformation("+7-000-000-00-00", '0'),
-        labelText = "Телефон",
+        caption = "Телефон",
     )
 }

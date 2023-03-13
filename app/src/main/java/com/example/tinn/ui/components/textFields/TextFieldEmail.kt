@@ -28,7 +28,7 @@ fun TextFieldEmailWithButtonChange(
     TextFieldsWithButtonChange(
         value = email,
         onValueChange = { text -> onValueChange(text) },
-        labelText = "Введите email",
+        caption = "Электронная почта",
         onSave = { onSave() },
         isError = email.emailIfValid().not(),
         errorText = "Email не валиден",

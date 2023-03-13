@@ -2,12 +2,17 @@ package com.example.tinn.ui.components.textFields
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.tinn.ui.components.TextWithCaption
 import com.example.tinn.ui.theme.Alpha
 import com.example.tinn.ui.theme.Blue
 import com.example.tinn.ui.theme.Gray
@@ -60,46 +65,51 @@ fun TextFieldsWithButtonChange(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     onSave: () -> Unit,
     errorText: String = "",
-    labelText: String = "",
+    caption: String,
     isError: Boolean = false,
-    modifier: Modifier = Modifier
-        .fillMaxWidth(),
     keyboardOptions: KeyboardOptions = KeyboardOptions()
 ) {
     var isEnabled by remember { mutableStateOf(false) }
 
-    Column {
-        TextField(
-            value = value,
-            onValueChange = { text -> onValueChange(text) },
-            modifier = modifier,
-            enabled = isEnabled,
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Alpha,
-                textColor = MaterialTheme.colors.onSurface,
-                disabledTextColor = Gray
-            ),
-            trailingIcon = {
-                Text(
-                    text = if (isEnabled) "cохранить" else "изменить",
-                    color = Blue,
-                    modifier = Modifier.clickable {
+    TextWithCaption(caption = caption) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 12.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Column {
+                BasicTextField(
+                    value = value,
+                    onValueChange = { text -> onValueChange(text) },
+                    textStyle = TextStyle(
+                        color = if (isError) MaterialTheme.colors.error
+                        else if (isEnabled) MaterialTheme.colors.onSurface
+                        else MaterialTheme.colors.onBackground
+                    ),
+                    enabled = isEnabled,
+                    keyboardOptions = keyboardOptions,
+                    visualTransformation = visualTransformation,
+                )
+
+                if (isError) {
+                    Text(
+                        text = errorText,
+                        color = MaterialTheme.colors.error,
+                        modifier = Modifier.padding(start = 40.dp)
+                    )
+                }
+            }
+
+            Text(
+                text = if (isEnabled) "cохранить" else "изменить",
+                color = Blue,
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .clickable {
                         if (isEnabled) onSave()
                         isEnabled = isEnabled.not()
                     }
-                )
-            },
-            label = { Text(labelText) },
-            keyboardOptions = keyboardOptions,
-            visualTransformation = visualTransformation,
-            isError = isError
-        )
-
-        if (isError) {
-            Text(
-                text = errorText,
-                color = MaterialTheme.colors.error,
-                modifier = Modifier.padding(start = 40.dp)
             )
         }
     }
